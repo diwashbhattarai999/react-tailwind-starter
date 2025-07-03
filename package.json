@@ -96,5 +96,10 @@
     "*.{json,md}": [
       "pnpm run format"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

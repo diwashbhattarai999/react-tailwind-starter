@@ -1,7 +1,7 @@
 echo "🔍 Running pre-commit hooks..."
 
 # Run lint-staged with stricter settings
-npx lint-staged --verbose --no-stash || {
+npx lint-staged --verbose --no-stash && pnpm type-check || {
   echo "❌ lint-staged failed. Please fix the issues above and try committing again."
   exit 1
 }
