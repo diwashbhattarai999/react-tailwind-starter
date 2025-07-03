@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate, useRouteError } from 'react-router';
 
 import { Bug, RefreshCw } from 'lucide-react';
@@ -82,10 +81,6 @@ export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () 
   const error = useRouteError() as Error;
   const navigate = useNavigate();
   const isDev = import.meta.env.DEV;
-
-  useEffect(() => {
-    console.error('UpchaarNepal Error:', error);
-  }, [error]);
 
   const handleResetError = () => {
     if (resetErrorBoundary) {

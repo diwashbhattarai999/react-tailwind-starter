@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/diwashbhattarai999/nextjs-frontend-template.git"
   },
-  "author": "UpchaarNepal",
+  "author": "Diwash Bhattarai",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
