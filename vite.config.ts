@@ -1,12 +1,27 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig, loadEnv } from "vite";
-import path from "path";
+// ============================================================
+// Vite Configuration File
+// This file configures the Vite development and build setup
+// ============================================================
+
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite';
+import path from 'path';
 
 export default ({ mode }: { mode: string }) => {
-  // Load app-level env vars to node-level env vars.
+  // ============================================================
+  // Load environment variables based on the current mode
+  // This merges the existing process.env with the environment variables
+  // from the .env file corresponding to the specified mode
+  // ============================================================
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+
   return defineConfig({
-    plugins: [react()],
+    // ============================================================
+    // Plugins
+    // Adding support for React and TailwindCSS
+    // ============================================================
+    plugins: [react(), tailwindcss()],
 
     // ============================================================
     // Development Server Configuration
@@ -14,16 +29,8 @@ export default ({ mode }: { mode: string }) => {
     // - open: Automatically opens the browser when the server starts
     // ============================================================
     server: {
-      port: Number(process.env.VITE_PORT) || 3000,
+      port: Number(process.env.VITE_PORT) || 5173,
       // open: true,
-    },
-
-    // ============================================================
-    // Preview Configuration
-    // - port: The port on which the preview server runs
-    // ============================================================
-    preview: {
-      port: Number(process.env.VITE_PORT) || 8000,
     },
 
     // ============================================================
@@ -33,9 +40,9 @@ export default ({ mode }: { mode: string }) => {
     // - sourcemap: Generates source maps for debugging in development mode
     // ============================================================
     build: {
-      outDir: "dist",
-      minify: "terser",
-      sourcemap: process.env.NODE_ENV === "development",
+      outDir: 'dist',
+      minify: 'terser',
+      sourcemap: process.env.NODE_ENV === 'development',
     },
 
     // ============================================================
@@ -44,7 +51,7 @@ export default ({ mode }: { mode: string }) => {
     // ============================================================
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        '@': path.resolve(__dirname, './src'),
       },
     },
   });

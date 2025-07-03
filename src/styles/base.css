@@ -1,0 +1,30 @@
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+  }
+}
+
+@layer utilities {
+  /* Disable color transitions on page load */
+  .disable-transitions *,
+  .disable-transitions *::before,
+  .disable-transitions *::after {
+    transition-property: color, fill, stroke !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+
+  /* Hide scrollbar for all browsers */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
