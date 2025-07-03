@@ -1,0 +1,84 @@
+{
+  // =============================================
+  // File Inclusion
+  // =============================================
+  "include": [
+    "src/**/*", // Include all files in the src directory
+    "vite.config.ts" // Include the Vite configuration file
+  ],
+
+  // =============================================
+  // File Exclusion
+  // =============================================
+  "exclude": [
+    "node_modules", // Exclude node_modules directory
+    "dist" // Exclude output directory
+  ],
+
+  // =============================================
+  // Compiler Options
+  // =============================================
+  "compilerOptions": {
+    // -------------------------------
+    // JavaScript Language Features
+    // -------------------------------
+    "target": "ES2022", // Compile to ES2022 syntax
+    "lib": ["DOM", "DOM.Iterable", "ES2022"], // Include DOM and ES2022 type definitions
+    "module": "ES2022", // Use ES modules (ESM) format
+    "useDefineForClassFields": true, // Use modern class fields behavior
+
+    // -------------------------------
+    // Type Checking
+    // -------------------------------
+    "strict": true, // Enable all strict type checking options
+    "noUncheckedIndexedAccess": true, // Require index access checks (e.g., array[0] might be undefined)
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statements
+    "skipLibCheck": true, // Skip type checking of declaration files (improves performance)
+
+    // -------------------------------
+    // Module Resolution
+    // -------------------------------
+    "baseUrl": ".", // Base directory for module resolution
+    "paths": {
+      // Path aliases configuration
+      "@/*": ["./src/*"] // Map @/* to ./src/* for imports
+    },
+    "moduleResolution": "bundler", // Use modern module resolution for bundlers
+    "allowImportingTsExtensions": true, // Allow importing .ts files without extension
+    "resolveJsonModule": true, // Allow importing JSON files
+    "moduleDetection": "force", // Force TypeScript to detect modules
+    "esModuleInterop": true, // Enable better interoperability between CJS and ESM
+    "verbatimModuleSyntax": true, // Use simpler, more predictable module syntax
+
+    // -------------------------------
+    // JavaScript Support
+    // -------------------------------
+    "allowJs": true, // Allow JavaScript files to be compiled
+
+    // -------------------------------
+    // Emit Options
+    // -------------------------------
+    "isolatedModules": true, // Ensure each file can be safely transpiled independently
+    "noEmit": true, // Don't emit output (use bundler for output)
+
+    // -------------------------------
+    // JSX Configuration
+    // -------------------------------
+    "jsx": "react-jsx", // Transform JSX using React's automatic JSX runtime
+
+    // -------------------------------
+    // Type Definitions
+    // -------------------------------
+    "types": [
+      "node", // Node.js type definitions
+      "vite/client" // Vite client types
+    ],
+
+    // -------------------------------
+    // File Naming & Case Sensitivity
+    // -------------------------------
+    "forceConsistentCasingInFileNames": true // Ensure consistent casing for file names to avoid cross-platform issues
+  }
+}
