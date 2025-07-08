@@ -8,7 +8,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 export const NotFound = ({
-  showBackgroundGlow,
+  showBackgroundGlow = true,
   className,
 }: {
   className?: string;

@@ -1,0 +1,30 @@
+name: 🚀 Feature Request
+description: Suggest a new feature or improvement for React Template.
+title: "[Feature] "
+labels: [ "enhancement", "frontend" ]
+assignees: DiwashBhattarai
+body:
+- type: textarea
+  id: feature-description
+  attributes:
+    label: Feature Description
+    description: Provide a clear and concise description of the feature you want to see in React Template.
+    placeholder: "Example: Add dark mode support to the dashboard..."
+  validations:
+    required: true
+
+- type: textarea
+  id: use-case
+  attributes:
+    label: Use Case
+    description: Explain why this feature is useful or necessary. Who benefits and how?
+    placeholder: "This will help users who prefer working at night to have a better experience..."
+  validations:
+    required: true
+
+- type: textarea
+  id: alternatives
+  attributes:
+    label: Alternatives Considered
+    description: Have you explored or considered any other solutions or workarounds?
+    placeholder: "We could alternatively use a browser extension, but native support would be better..."

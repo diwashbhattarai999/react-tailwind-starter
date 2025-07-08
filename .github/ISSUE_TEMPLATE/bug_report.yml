@@ -1,0 +1,58 @@
+name: 🐛 Bug Report
+description: Report a reproducible bug in React Template.
+title: "[BUG] "
+labels: [ "bug", "frontend" ]
+assignees: DiwashBhattarai
+body:
+- type: textarea
+  id: what-happened
+  attributes:
+    label: What happened?
+    description: Describe the issue you encountered along with the expected behavior.
+    placeholder: "Example: Button X does not respond when clicked..."
+  validations:
+    required: true
+
+- type: textarea
+  id: steps-to-reproduce
+  attributes:
+    label: Steps to Reproduce
+    description: Provide step-by-step instructions so we can reproduce the bug.
+    placeholder: |
+      1. Go to the homepage
+      2. Click on the Login button
+      3. Observe the UI glitch...
+  validations:
+    required: true
+
+- type: textarea
+  id: logs
+  attributes:
+    label: Console Logs & Errors
+    description: "Paste any relevant logs or errors from the browser console or network tab."
+    render: shell
+
+- type: input
+  id: browser
+  attributes:
+    label: Browser
+    description: Which browser and version did you experience this in?
+    placeholder: "Example: Chrome 123.0.0.1"
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Environment
+    description: Where did you encounter the bug?
+    options:
+    - "Local Development"
+    - "Staging"
+    - "Production"
+  validations:
+    required: true
+
+- type: textarea
+  id: screenshots
+  attributes:
+    label: Screenshots (optional)
+    description: Add screenshots or videos to help explain your problem (if applicable).

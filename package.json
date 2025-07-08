@@ -1,14 +1,20 @@
 {
-  "name": "learn-react",
+  "name": "foundation-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "A React project setup with Vite, TypeScript, and ESLint",
+  "description": "A production-ready React template setup with Vite, TypeScript, ESLint, Prettier, Tailwind, React Hook Form, Zod, and more.",
   "keywords": [
     "react",
     "vite",
     "typescript",
-    "eslint"
+    "eslint",
+    "template",
+    "prettier",
+    "tailwind",
+    "react-hook-form",
+    "zod",
+    "react-query"
   ],
   "repository": {
     "type": "git",
