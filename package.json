@@ -34,6 +34,7 @@
     "type-check": "tsc --noEmit --incremental",
     "upgrade": "npx npm-check-updates -u && pnpm install",
     "prepare": "husky",
+    "commit": "cz",
     "docker:build": "docker build -t upn-clinic-app:prod .",
     "docker:run": "docker run --name upn-clinic-app -p 8080:8080 upn-clinic-app:prod"
   },
@@ -72,6 +73,7 @@
     "@typescript-eslint/parser": "^8.33.0",
     "@vitejs/plugin-react": "^4.5.0",
     "@vitejs/plugin-react-swc": "^3.9.0",
+    "commitizen": "^4.3.1",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",

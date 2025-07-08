@@ -60,6 +60,7 @@
     // -------------------------------
     // Emit Options
     // -------------------------------
+    "outDir": "dist", // Output directory for compiled files
     "isolatedModules": true, // Ensure each file can be safely transpiled independently
     "noEmit": true, // Don't emit output (use bundler for output)
 

@@ -34,18 +34,6 @@ export default ({ mode }: { mode: string }) => {
     },
 
     // ============================================================
-    // Build Configuration
-    // - outDir: Output directory for the build
-    // - minify: Specifies the minification strategy ('terser' used for better compression)
-    // - sourcemap: Generates source maps for debugging in development mode
-    // ============================================================
-    build: {
-      outDir: 'dist',
-      minify: 'terser',
-      sourcemap: process.env.NODE_ENV === 'development',
-    },
-
-    // ============================================================
     // Module Resolution Configuration
     // - alias: Defines path aliases to simplify imports (e.g. When importing '@/components', it will resolve to 'src/components')
     // ============================================================
