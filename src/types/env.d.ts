@@ -19,12 +19,12 @@ interface ImportMetaEnv {
   /**
    * Base URL for API.
    */
-  readonly VITE__API_URL: string;
+  readonly VITE_API_URL: string;
 
   /**
    * API key for authenticating requests to the API.
    */
-  readonly VITE__API_KEY: string;
+  readonly VITE_API_KEY: string;
 }
 
 /**

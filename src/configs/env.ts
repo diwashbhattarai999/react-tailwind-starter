@@ -21,7 +21,7 @@ export const ENV = {
    * Each service has a base URL and an API key for authentication.
    */
   APIS: {
-    BASE_URL: import.meta.env.VITE__API_URL,
-    API_KEY: import.meta.env.VITE__API_KEY,
+    BASE_URL: import.meta.env.VITE_API_URL,
+    API_KEY: import.meta.env.VITE_API_KEY,
   },
 };
