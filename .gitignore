@@ -15,6 +15,7 @@ lerna-debug.log*
 # ============================================================
 # Ignore dependencies installed by package managers
 node_modules/
+tsconfig.tsbuildinfo
 
 # ============================================================
 # Build output
@@ -51,3 +52,4 @@ dist-ssr/
 *.bak             # Backup files
 *.tmp             # Temporary files
 Thumbs.db         # Windows thumbnail cache
+
