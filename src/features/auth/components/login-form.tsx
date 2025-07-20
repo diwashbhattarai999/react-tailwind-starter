@@ -1,20 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
-
-import { LogIn } from 'lucide-react';
 
 import { FormErrorMessage } from '@/components/shared/form-message';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { ROUTES } from '@/configs/routes';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { type LoginFormData, loginSchema } from '../schema/login-schema';
@@ -22,7 +11,7 @@ import { type LoginFormData, loginSchema } from '../schema/login-schema';
 export const LoginForm = () => {
   const form = useForm<LoginFormData>({
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
     resolver: zodResolver(loginSchema),
@@ -38,20 +27,20 @@ export const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
+      <form className='w-[50%] space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+        <p className='font-semibold'>Sign In</p>
         {/* Email Address */}
         <FormField
           control={form.control}
-          name='email'
+          name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='mb-1'>Email Address</FormLabel>
               <FormControl>
                 <Input
-                  className='bg-background/20 h-14 rounded-full px-4'
-                  error={form.formState.errors.email?.message}
-                  placeholder='e.g. johndoe2025@gmail.com'
-                  type='email'
+                  className='bg-background/20 h-10 px-4'
+                  error={form.formState.errors.username?.message}
+                  placeholder='Username'
+                  type='username'
                   {...field}
                 />
               </FormControl>
@@ -66,14 +55,13 @@ export const LoginForm = () => {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='mb-1'>Password</FormLabel>
               <FormControl>
                 <Input
                   error={form.formState.errors.password?.message}
-                  placeholder='**********'
+                  placeholder='Password'
                   type='password'
                   {...field}
-                  className='bg-background/20 h-14 rounded-full px-4'
+                  className='bg-background/20 h-10'
                 />
               </FormControl>
               <FormMessage />
@@ -81,27 +69,18 @@ export const LoginForm = () => {
           )}
         />
 
-        <div className='-mt-4 flex w-full items-center'>
-          <Link
-            className='text-primary text-sm font-semibold hover:underline'
-            to={ROUTES.AUTH.FORGOT_PASSWORD}
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
         {/* Error Message */}
         <FormErrorMessage error={errorMessage} />
 
         {/* Submit Button */}
         <Button
-          className='h-14 w-full gap-4 rounded-full'
+          className='bg-[var(--green)]'
           isLoading={isPending}
-          loadingText='Logging in...'
+          loadingText='signing in...'
+          size={'sm'}
           type='submit'
         >
-          <LogIn />
-          Login
+          Sign In
         </Button>
       </form>
     </Form>
