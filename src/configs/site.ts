@@ -1,5 +1,5 @@
-import type { Language } from '@/components/providers/language-provider';
 import type { Theme } from '@/components/providers/theme-provider';
+import type { Language } from '@/i18n';
 
 interface SiteConfig {
   name: string;

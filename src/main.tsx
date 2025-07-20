@@ -6,7 +6,7 @@ import { router } from '@/app/router';
 
 import '@/styles/tailwind.css';
 
-import '@/configs/i18n';
+import '@/i18n';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

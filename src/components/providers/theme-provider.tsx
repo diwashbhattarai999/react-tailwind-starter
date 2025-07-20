@@ -1,6 +1,7 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
 import { SITE_CONFIG } from '@/configs/site';
+import { useLocalStorage } from '@/hooks/use-local-storage';
 
 // Define the Theme type
 export type Theme = 'dark' | 'light' | 'system';
@@ -20,7 +21,7 @@ type ThemeProviderState = {
 
 // Initial state for the theme provider
 const initialState: ThemeProviderState = {
-  theme: 'system',
+  theme: SITE_CONFIG.defaultTheme || 'system',
   setTheme: () => null,
 };
 
@@ -31,21 +32,21 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
  * Get the initial theme from localStorage or return the default theme.
  * This function checks the localStorage for a stored theme value.
  * If found, it returns that value; otherwise, it returns the provided default theme.
+ *
+ * @param defaultTheme - The default theme to use if no value is found in localStorage.
+ * @param storageKey - The key under which the theme is stored in localStorage.
+ * @returns The initial theme value.
  */
 export function ThemeProvider({
   children,
   defaultTheme = SITE_CONFIG.defaultTheme || 'system',
   storageKey = SITE_CONFIG.themeStorageKey || 'react-theme',
-  ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useLocalStorage<Theme>(storageKey, defaultTheme);
 
   // Initialize theme from localStorage or defaultTheme
   useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove('light', 'dark');
 
     if (theme === 'system') {
@@ -69,11 +70,7 @@ export function ThemeProvider({
     },
   };
 
-  return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
+  return <ThemeProviderContext.Provider value={value}>{children}</ThemeProviderContext.Provider>;
 }
 
 /**

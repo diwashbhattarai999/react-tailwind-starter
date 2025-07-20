@@ -1,10 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SITE_CONFIG } from '@/configs/site';
-
-// Define the Language type
-export type Language = 'en' | 'ne';
+import { useLocalStorage } from '@/hooks/use-local-storage';
+import type { Language } from '@/i18n';
 
 // Props for the LanguageProvider component
 type LanguageProviderProps = {
@@ -21,22 +20,12 @@ type LanguageProviderState = {
 
 // Initial state for the language provider
 const initialState: LanguageProviderState = {
-  language: 'en',
+  language: SITE_CONFIG.defaultLanguage || 'en',
   setLanguage: () => null,
 };
 
 // Create a context for the language provider
 const LanguageProviderContext = createContext<LanguageProviderState>(initialState);
-
-/**
- * Get the initial language from localStorage or return the default language.
- * This function checks the localStorage for a stored language value.
- * If found, it returns that value; otherwise, it returns the provided default language.
- */
-const getInitialLanguage = (storageKey: string, defaultLanguage: Language): Language => {
-  const storedLanguage = localStorage.getItem(storageKey) as Language;
-  return storedLanguage || defaultLanguage;
-};
 
 /**
  * LanguageProvider component to provide language context to the application.
@@ -51,26 +40,18 @@ export function LanguageProvider({
   ...props
 }: LanguageProviderProps) {
   const { i18n } = useTranslation();
-  const [language, setLanguage] = useState<Language>(() =>
-    getInitialLanguage(storageKey, defaultLanguage)
-  );
+
+  const [language, setLanguage] = useLocalStorage<Language>(storageKey, defaultLanguage);
 
   // Initialize language from localStorage or defaultLanguage
   useEffect(() => {
-    const storedLanguage = localStorage.getItem(storageKey) as Language;
-    if (storedLanguage) {
-      setLanguage(storedLanguage);
-      void i18n.changeLanguage(storedLanguage);
-    } else {
-      void i18n.changeLanguage(defaultLanguage);
-    }
-  }, [defaultLanguage, i18n, storageKey]);
+    void i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   // Function to handle language change
   const handleLanguageChange = (newLanguage: Language) => {
     void i18n.changeLanguage(newLanguage);
     setLanguage(newLanguage);
-    localStorage.setItem(storageKey, newLanguage);
   };
 
   // Value to be provided to the context

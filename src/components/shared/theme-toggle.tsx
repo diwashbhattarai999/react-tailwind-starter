@@ -7,11 +7,11 @@ import { Slot } from '@radix-ui/react-slot';
 
 import { useTheme } from '../providers/theme-provider';
 
-const themeToggleVariants = cva('w-full justify-start !gap-4 px-2 font-normal', {
+const themeToggleVariants = cva('font-normal', {
   variants: {
     toggleVariant: {
-      default: '',
-      icon: '',
+      default: 'w-full justify-start px-2 !gap-4',
+      icon: 'rounded-full size-10',
     },
   },
   defaultVariants: {
@@ -50,13 +50,13 @@ export function ThemeToggle({
     >
       {theme === 'dark' ? (
         <>
-          <Sun className='size-[1.2rem]' />
-          Light Mode
+          <Sun />
+          {!toggleVariant && <span>Light Mode</span>}
         </>
       ) : (
         <>
-          <Moon className='size-[1.2rem]' />
-          Dark Mode
+          <Moon />
+          {!toggleVariant && <span>Dark Mode</span>}
         </>
       )}
     </Comp>

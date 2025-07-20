@@ -36,8 +36,6 @@ export const LoginForm = () => {
     console.log('Submitting login form:', data);
   };
 
-  console.log(form.formState.errors);
-
   return (
     <Form {...form}>
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
@@ -99,10 +97,10 @@ export const LoginForm = () => {
         <Button
           className='h-14 w-full gap-4 rounded-full'
           isLoading={isPending}
-          leftIcon={<LogIn />}
           loadingText='Logging in...'
           type='submit'
         >
+          <LogIn />
           Login
         </Button>
       </form>
