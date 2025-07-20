@@ -4,12 +4,9 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 
-export const LANGUAGES = {
-  en: { label: 'English', locale: 'en' },
-  ne: { label: 'Nepali', locale: 'ne' },
-} as const;
-
-export type Language = keyof typeof LANGUAGES;
+// Language definitions
+export const LANGUAGES = ['en', 'ne'] as const;
+export type Language = (typeof LANGUAGES)[number];
 
 /**
  * i18n configuration for internationalization

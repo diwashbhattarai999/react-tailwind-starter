@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SITE_CONFIG } from '@/configs/site';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import type { Language } from '@/i18n';
+import { type Language, LANGUAGES } from '@/i18n';
 
 // Props for the LanguageProvider component
 type LanguageProviderProps = {
@@ -16,12 +16,16 @@ type LanguageProviderProps = {
 type LanguageProviderState = {
   language: Language;
   setLanguage: (language: Language) => void;
+  getAvailableLanguages: () => Array<{ locale: Language; name: string }>;
+  getDisplayName: (locale: string, displayLocale?: string) => string;
 };
 
 // Initial state for the language provider
 const initialState: LanguageProviderState = {
   language: SITE_CONFIG.defaultLanguage || 'en',
   setLanguage: () => null,
+  getAvailableLanguages: () => [],
+  getDisplayName: () => '',
 };
 
 // Create a context for the language provider
@@ -48,6 +52,24 @@ export function LanguageProvider({
     void i18n.changeLanguage(language);
   }, [i18n, language]);
 
+  // Function to get the display name of a locale
+  const getLocaleDisplayName = (locale: string, displayLocale?: string) => {
+    const displayName = new Intl.DisplayNames([displayLocale || locale], {
+      type: 'language',
+    }).of(locale)!;
+    return displayName.charAt(0).toLocaleUpperCase() + displayName.slice(1);
+  };
+
+  // Memoize the available languages to avoid unnecessary recalculations
+  const getAvailableLanguages = useMemo(
+    () =>
+      LANGUAGES.map(locale => ({
+        locale,
+        name: getLocaleDisplayName(locale),
+      })),
+    []
+  );
+
   // Function to handle language change
   const handleLanguageChange = (newLanguage: Language) => {
     void i18n.changeLanguage(newLanguage);
@@ -58,6 +80,9 @@ export function LanguageProvider({
   const value = {
     language,
     setLanguage: handleLanguageChange,
+    getAvailableLanguages: () => getAvailableLanguages,
+    getDisplayName: (locale: string, displayLocale?: string) =>
+      getLocaleDisplayName(locale, displayLocale),
   };
 
   return (

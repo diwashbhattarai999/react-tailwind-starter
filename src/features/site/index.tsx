@@ -1,11 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
 
 import Logo from '@/assets/logo.png';
 import { BackgroundGlow } from '@/components/shared/background-glow';
 import LanguageSwitcher from '@/components/shared/language-switcher';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
-import { Button } from '@/components/ui/button';
 
 export function LandingPage() {
   const { t } = useTranslation('translation');
@@ -21,11 +19,7 @@ export function LandingPage() {
 
         <LanguageSwitcher />
 
-        <ThemeToggle className='w-fit' toggleVariant='icon' />
-
-        <Button asChild isLoading loadingText='Clicking...'>
-          <Link to='/dashboard'>Click me</Link>
-        </Button>
+        <ThemeToggle className='w-fit' />
 
         <div className='space-y-4'>
           <h1 className='text-4xl font-bold'>{t('title')}</h1>

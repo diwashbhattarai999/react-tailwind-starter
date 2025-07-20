@@ -49,6 +49,9 @@ export function ThemeProvider({
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
 
+    // Add the class to disable transitions
+    root.classList.add('disable-transitions');
+
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
@@ -59,6 +62,16 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
+
+    // Remove the class after a short delay to re-enable transitions
+    const transitionTimeout = setTimeout(() => {
+      root.classList.remove('disable-transitions');
+    }, 100);
+
+    // Cleanup function to clear the timeout if the component unmounts
+    return () => {
+      clearTimeout(transitionTimeout);
+    };
   }, [theme]);
 
   // Create a value object to be provided to the context
