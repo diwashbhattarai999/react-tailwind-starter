@@ -1,8 +1,3 @@
-// ============================================================
-// API Client with Axios Interceptors
-// - Handles request authentication, error handling, and retries
-// ============================================================
-
 import axios, {
   type AxiosError,
   type AxiosInstance,
@@ -13,13 +8,36 @@ import axios, {
 import { ENV } from '@/configs/env';
 
 /**
- * Function to create an Axios instance for a specific API.
- * @param {string} baseUrl - The base URL of the API.
- * @param {string} apiKey - The API key for authentication.
- * @returns {AxiosInstance} - Configured Axios instance.
+ * Interceptors type definition for request and response interceptors.
+ * It allows customization of request and response handling in the Axios instance.
  */
-const createApiClient = (baseUrl: string, apiKey: string): AxiosInstance => {
-  const apiClient: AxiosInstance = axios.create({
+type Interceptors = {
+  onRequest?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
+  onRequestError?: (error: AxiosError) => Promise<never>;
+  onResponse?: (response: AxiosResponse) => AxiosResponse;
+  onResponseError?: (error: AxiosError) => Promise<never>;
+};
+
+interface CreateApiInstanceParams {
+  baseUrl: string;
+  apiKey: string;
+  interceptors?: Interceptors;
+}
+
+/**
+ * Creates an Axios instance with the provided base URL and interceptors.
+ * This function sets up the Axios instance with default headers, timeout, and request/response interceptors.
+ *
+ * @param {CreateApiInstanceParams} params - The parameters for creating the API instance.
+ * @returns {AxiosInstance} - The configured Axios instance.
+ */
+const createApiInstance = ({
+  apiKey,
+  baseUrl,
+  interceptors,
+}: CreateApiInstanceParams): AxiosInstance => {
+  // Create an Axios instance with the provided base URL and default settings
+  const apiInstance: AxiosInstance = axios.create({
     baseURL: baseUrl,
     timeout: 10000, // 10 seconds timeout
     headers: {
@@ -29,42 +47,78 @@ const createApiClient = (baseUrl: string, apiKey: string): AxiosInstance => {
     withCredentials: true, // Include cookies in requests
   });
 
-  // Request Interceptor
-  apiClient.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      const token = localStorage.getItem('access_token'); // Retrieve token from storage
+  /**
+   * Request Interceptor
+   *
+   * It uses the onRequest or onRequestError function from the interceptors object if provided,
+   * otherwise it uses a default function that adds an Authorization header
+   * with a token from localStorage and an API key to the request headers.
+   */
+  apiInstance.interceptors.request.use(
+    // Use provided onRequest interceptor or default one
+    interceptors?.onRequest ??
+      ((config: InternalAxiosRequestConfig) => {
+        const token = localStorage.getItem('access_token'); // Retrieve token from storage
 
-      // Add Authorization header if token is available
-      if (token) config.headers.set('Authorization', `Bearer ${token}`);
+        // Add Authorization header if token is available
+        if (token) config.headers.set('Authorization', `Bearer ${token}`);
 
-      // Add API key to headers
-      if (apiKey) config.headers.set('x-api-key', apiKey);
+        // Add API key to headers
+        if (apiKey) config.headers.set('x-api-key', apiKey);
 
-      return config;
-    },
-    (error: AxiosError) => Promise.reject(error)
+        return config;
+      }),
+
+    // Use provided onRequestError interceptor or default one
+    interceptors?.onRequestError ?? ((error: AxiosError) => Promise.reject(error))
   );
 
-  // Response Interceptor
-  apiClient.interceptors.response.use(
-    (response: AxiosResponse) => response, // Return response data directly
-    async (error: AxiosError) => {
-      console.error('[API Response Error]:', error);
+  /**
+   * Response Interceptor
+   *
+   * It uses the onResponse or onResponseError function from the interceptors object if provided,
+   * otherwise it returns the response data directly or handles errors.
+   */
+  apiInstance.interceptors.response.use(
+    // Use provided onResponse interceptor or default one
+    interceptors?.onResponse ?? ((response: AxiosResponse) => response),
 
-      // Handle 401 Unauthorized: Refresh token if needed
-      if (error.response?.status === 401) {
-        console.warn('Unauthorized! Attempting token refresh...');
-        // Handle token refresh logic here (if applicable)
-      }
+    // Use provided onResponseError interceptor or default one
+    interceptors?.onResponseError ??
+      (async (error: AxiosError) => {
+        console.error('[API Response Error]:', error);
 
-      return Promise.reject(error);
-    }
+        // Handle 401 Unauthorized: Refresh token if needed
+        if (error.response?.status === 401) {
+          console.warn('Unauthorized! Attempting token refresh...');
+          // Handle token refresh logic here (if applicable)
+        }
+
+        return Promise.reject(error);
+      })
   );
 
-  return apiClient;
+  return apiInstance;
 };
 
 // Create Axios instances for each API
-export const clinicApi = createApiClient(ENV.APIS.BASE_URL, ENV.APIS.API_KEY);
+export const apiClient = createApiInstance({
+  baseUrl: ENV.APIS.BASE_URL,
+  apiKey: ENV.APIS.API_KEY,
+  interceptors: {
+    onRequest: config => {
+      console.log('Request made with ', config);
+      return config;
+    },
+    onResponse: response => {
+      console.log('Response received', response);
+      return response;
+    },
+    onResponseError: async error => {
+      console.error('Response error', error);
+      return Promise.reject(error);
+    },
+  },
+});
 
-// Add more API clients as needed...
+// More API instances can be created similarly...

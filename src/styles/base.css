@@ -28,3 +28,20 @@
     display: none; /* Safari and Chrome */
   }
 }
+
+/* Radix UI utilities */
+@layer utilities {
+  .dropdown-w-full {
+    width: var(--radix-dropdown-menu-trigger-width);
+    max-height: var(--radix-dropdown-menu-content-available-height);
+  }
+
+  .popover-w-full {
+    width: var(--radix-popover-trigger-width);
+    max-height: var(--radix-popper-content-available-height);
+  }
+}
+
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}

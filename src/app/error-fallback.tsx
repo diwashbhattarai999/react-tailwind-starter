@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useRouteError } from 'react-router';
 
 import { Bug, RefreshCw } from 'lucide-react';
@@ -5,12 +6,14 @@ import { Bug, RefreshCw } from 'lucide-react';
 import brokenHeart from '@/assets/error.svg';
 import { Button } from '@/components/ui/button';
 
+const isDev = import.meta.env.DEV;
+
 /**
  * Component: DevErrorDetails
  * Shows stack trace and error message in development mode
  */
 const DevErrorDetails = ({ error }: { error: Error }) => (
-  <div className='mb-6 rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-800 dark:border-red-900 dark:bg-red-900/10 dark:text-red-100'>
+  <div className='mb-6 rounded-md border border-red-200 bg-red-50 p-4 text-base text-red-800 dark:border-red-900 dark:bg-red-900/10 dark:text-red-100'>
     <div className='mb-2 flex items-center gap-2 font-semibold'>
       <Bug className='text-destructive size-4' />
       Development Error Info
@@ -19,7 +22,7 @@ const DevErrorDetails = ({ error }: { error: Error }) => (
       <strong>Message:</strong> {error.message}
     </div>
     {error.stack && (
-      <pre className='max-h-96 overflow-y-auto rounded bg-red-100 p-2 text-xs break-words whitespace-pre-wrap dark:bg-red-900/50'>
+      <pre className='max-h-96 overflow-y-auto rounded bg-red-100 p-2 text-sm break-words whitespace-pre-wrap dark:bg-red-900/50'>
         {error.stack}
       </pre>
     )}
@@ -36,19 +39,23 @@ const ErrorActions = ({
 }: {
   resetErrorBoundary?: () => void;
   onNavigateHome: () => void;
-}) => (
-  <div className='flex flex-wrap gap-4'>
-    {resetErrorBoundary && (
-      <Button variant='destructive' onClick={resetErrorBoundary}>
-        <RefreshCw className='mr-2 size-4' />
-        Try Again
+}) => {
+  const { t } = useTranslation('error');
+
+  return (
+    <div className='flex flex-wrap gap-4'>
+      {resetErrorBoundary && (
+        <Button variant='destructive' onClick={resetErrorBoundary}>
+          {isDev ? 'Try Again' : t('try_again')}
+          <RefreshCw className='mr-2 size-4' />
+        </Button>
+      )}
+      <Button variant='outline' onClick={onNavigateHome}>
+        {isDev ? 'Return Home' : t('return_home')}
       </Button>
-    )}
-    <Button variant='outline' onClick={onNavigateHome}>
-      Return Home
-    </Button>
-  </div>
-);
+    </div>
+  );
+};
 
 /**
  * Component: ErrorInfo
@@ -62,25 +69,28 @@ const ErrorInfo = ({
   title: string;
   subtitle: string;
   children?: React.ReactNode;
-}) => (
-  <>
-    <h1 className='mb-2 text-xl font-bold md:text-2xl'>{title}</h1>
-    <h2 className='text-muted-foreground mb-4'>{subtitle}</h2>
-    <p className='text-muted-foreground/80 mb-1 text-sm'>
-      Don’t worry, our tech doctors are already on it. Meanwhile, sip some hot tea and try again.
-    </p>
-    {children}
-  </>
-);
+}) => {
+  const { t } = useTranslation('error');
+
+  return (
+    <>
+      <h1 className='mb-2 text-xl font-bold md:text-2xl'>{title}</h1>
+      <h2 className='text-muted-foreground mb-4'>{subtitle}</h2>
+      {!isDev && <p className='text-muted-foreground/80 mb-1 text-sm'>{t('sub_note')}</p>}
+      {children}
+    </>
+  );
+};
 
 /**
  * Component: ErrorFallback
  * Main error boundary fallback component
  */
 export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () => void }) => {
+  const { t } = useTranslation('error');
+
   const error = useRouteError() as Error;
   const navigate = useNavigate();
-  const isDev = import.meta.env.DEV;
 
   const handleResetError = () => {
     if (resetErrorBoundary) {
@@ -92,26 +102,30 @@ export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () 
 
   return (
     <div className='flex min-h-screen items-center justify-center p-4'>
-      <div className='flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:gap-12'>
+      <div className='flex w-full max-w-6xl flex-col items-center gap-8 md:flex-row md:gap-12'>
         <div className='flex-1'>
           <ErrorInfo
-            subtitle='Even digital doctors need a checkup sometimes.'
-            title='Uh-oh, looks like our system caught a cold!'
+            title={isDev ? 'Oops! A wild bug appeared!' : t('title')}
+            subtitle={
+              isDev
+                ? 'Something went wrong during development. Check the console or logs for details.'
+                : t('subtitle')
+            }
           >
             {isDev ? (
               <DevErrorDetails error={error} />
             ) : (
               <div className='mb-8 space-y-4'>
                 <p className='text-muted-foreground/80 text-sm'>
-                  If you need urgent help, please{' '}
+                  {t('support_prefix')}{' '}
                   <a className='text-primary hover:underline' href='/contact'>
-                    contact our support
+                    {t('contact_support')}
                   </a>
-                  . Or visit our{' '}
+                  . {t('support_suffix')}{' '}
                   <a className='text-primary hover:underline' href='/help'>
-                    Help Center
-                  </a>{' '}
-                  for answers.
+                    {t('help_center')}
+                  </a>
+                  .
                 </p>
               </div>
             )}
@@ -124,7 +138,7 @@ export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () 
 
         {!isDev && (
           <div className='w-full max-w-[250px] md:max-w-[400px]'>
-            <img alt='Error illustration' className='h-auto w-full' src={brokenHeart} />
+            <img alt={t('image_alt')} className='h-auto w-full' src={brokenHeart} />
           </div>
         )}
 

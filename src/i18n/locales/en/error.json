@@ -1,0 +1,14 @@
+{
+  "title": "Uh-oh, looks like our system caught a cold!",
+  "subtitle": "Even digital doctors need a checkup sometimes.",
+  "sub_note": "Don’t worry, our tech doctors are already on it. Meanwhile, sip some hot tea and try again.",
+  "try_again": "Try Again",
+  "return_home": "Return Home",
+  "dev_info": "Development Error Info",
+  "message": "Message",
+  "support_prefix": "If you need urgent help, please",
+  "contact_support": "contact our support",
+  "support_suffix": "Or visit our",
+  "help_center": "Help Center",
+  "image_alt": "Error illustration"
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
@@ -37,8 +38,6 @@ export interface ButtonProps
   asChild?: boolean;
   isLoading?: boolean;
   loadingText?: string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
   loaderClassName?: string;
 }
 
@@ -50,34 +49,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size,
       asChild = false,
       isLoading = false,
-      loadingText,
-      leftIcon,
-      rightIcon,
+      loadingText = 'Loading...',
       loaderClassName,
+      children,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : 'button';
-
-    /**  Loader element to display when in loading state is true. */
-    const loaderElement = isLoading ? (
-      <div aria-hidden className='relative inline-flex items-center justify-center'>
-        <div role='status'>
-          <div
-            className={cn(
-              'border-primary-foreground/20 border-t-primary-foreground size-4 animate-spin rounded-full border-2',
-              {
-                'border-secondary-foreground/20 border-t-secondary-foreground':
-                  variant === 'secondary' || variant === 'outline' || variant === 'ghost',
-              },
-              loaderClassName
-            )}
-          />
-          <span className='sr-only'>Loading...</span>
-        </div>
-      </div>
-    ) : null;
+    const LoadingComp = asChild ? 'button' : 'span';
 
     return (
       <Comp
@@ -86,10 +66,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={props.disabled || isLoading}
         {...props}
       >
-        {loaderElement}
-        {!isLoading && leftIcon && leftIcon}
-        {isLoading ? loadingText : props.children}
-        {!isLoading && rightIcon && rightIcon}
+        {isLoading ? (
+          <LoadingComp className='flex items-center gap-2'>
+            <Loader2 className={cn('animate-spin', loaderClassName)} />
+            <span className='sr-only'>Loading...</span>
+
+            {loadingText}
+          </LoadingComp>
+        ) : (
+          children
+        )}
       </Comp>
     );
   }
