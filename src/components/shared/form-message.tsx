@@ -21,7 +21,7 @@ const FormErrorMessage = ({ error, className }: FormErrorProps) => {
   return (
     <div
       className={cn(
-        'text-destructive bg-destructive/5 border-destructive/5 flex items-center gap-2 rounded-md border p-4 text-sm font-medium',
+        'text-destructive bg-destructive/5 border-destructive/5 flex items-center gap-2 rounded-md border p-4 text-xs font-medium',
         className
       )}
     >
