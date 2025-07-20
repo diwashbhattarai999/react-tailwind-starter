@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import Logo from '@/assets/logo.png';
 import { BackgroundGlow } from '@/components/shared/background-glow';
 import LanguageSwitcher from '@/components/shared/language-switcher';
+import { Logo } from '@/components/shared/logo';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
 
 export function LandingPage() {
@@ -13,9 +13,7 @@ export function LandingPage() {
       <BackgroundGlow />
 
       <div className='flex flex-col items-center justify-center gap-y-10 text-center'>
-        <div className='mx-auto size-16'>
-          <img alt='logo' className='size-full rounded-xl' src={Logo} />
-        </div>
+        <Logo />
 
         <LanguageSwitcher />
 
