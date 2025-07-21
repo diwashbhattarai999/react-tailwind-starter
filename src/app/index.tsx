@@ -12,7 +12,7 @@ function App() {
   return (
     <ReduxProvider>
       <TanstackProvider>
-        <ThemeProvider defaultTheme='dark' storageKey='upn-admin-theme'>
+        <ThemeProvider>
           <LanguageProvider>
             <Outlet />
 

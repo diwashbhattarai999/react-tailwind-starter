@@ -21,7 +21,7 @@ type ThemeProviderState = {
 
 // Initial state for the theme provider
 const initialState: ThemeProviderState = {
-  theme: SITE_CONFIG.defaultTheme || 'system',
+  theme: SITE_CONFIG.defaultTheme || 'light',
   setTheme: () => null,
 };
 
@@ -39,7 +39,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
  */
 export function ThemeProvider({
   children,
-  defaultTheme = SITE_CONFIG.defaultTheme || 'system',
+  defaultTheme = SITE_CONFIG.defaultTheme || 'light',
   storageKey = SITE_CONFIG.themeStorageKey || 'react-theme',
 }: ThemeProviderProps) {
   const [theme, setTheme] = useLocalStorage<Theme>(storageKey, defaultTheme);
