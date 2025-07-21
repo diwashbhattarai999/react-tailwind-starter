@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  PORTAL: '/portal',
   AUTH: {
     BASE: '/auth',
     LOGIN: '/auth/login',
