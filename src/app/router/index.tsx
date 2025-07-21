@@ -9,6 +9,7 @@ import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
+import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
 import { LandingPage } from '@/features/site';
 
 import { ErrorFallback } from '../error-fallback';
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: ROUTES.HOME, element: <LandingPage /> },
       { path: ROUTES.NAV.BASE, element: <CombinedlogComp /> },
 
+      { path: ROUTES.PORTAL, element: <PortalSelectionPage /> },
       // Auth routes (redirect authenticated users away)
       {
         Component: AuthRedirect,
@@ -61,6 +63,7 @@ export const router = createBrowserRouter([
               },
             ],
           },
+          {},
 
           // Other protected routes can be added here...
         ],
