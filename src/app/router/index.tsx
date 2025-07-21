@@ -5,6 +5,7 @@ import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
 import { ProtectedRoute } from '@/components/guards/protected-route';
+import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
@@ -30,6 +31,8 @@ export const router = createBrowserRouter([
     children: [
       // Site routes
       { path: ROUTES.HOME, element: <LandingPage /> },
+      { path: ROUTES.NAV.BASE, element: <CombinedlogComp /> },
+
       { path: ROUTES.PORTAL, element: <PortalSelectionPage /> },
       // Auth routes (redirect authenticated users away)
       {
