@@ -11,5 +11,6 @@ export const ROUTES = {
   DASHBOARD: {
     BASE: '/dashboard',
     SETTINGS: '/dashboard/settings',
+    SEARCH: '/dashboard/search',
   },
 } as const;
