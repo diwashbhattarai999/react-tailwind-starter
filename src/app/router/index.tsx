@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
+import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 // import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
@@ -32,6 +33,8 @@ export const router = createBrowserRouter([
     children: [
       // Site routes
       { path: ROUTES.HOME, element: <LandingPage /> },
+      { path: ROUTES.NAV.BASE, element: <CombinedlogComp /> },
+
       { path: ROUTES.PORTAL, element: <PortalSelectionPage /> },
       // Auth routes (redirect authenticated users away)
       {

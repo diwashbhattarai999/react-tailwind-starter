@@ -13,4 +13,7 @@ export const ROUTES = {
     SETTINGS: '/dashboard/settings',
     SEARCH: '/dashboard/search',
   },
+  NAV: {
+    BASE: '/nav/mini',
+  },
 } as const;
