@@ -2,7 +2,7 @@ import locationSVG from '../assets/SVG.svg';
 
 interface UjCardProps {
   title?: string;
-  number?: string;
+  number?: number | string;
   icon?: string;
   iconAlt?: string;
   numberColorClass?: string;

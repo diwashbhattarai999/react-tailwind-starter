@@ -13,6 +13,7 @@ export const ROUTES = {
     ANALYTICSOVERVIEW: '/analytics-overview',
     SETTINGS: '/dashboard/settings',
     SEARCH: '/dashboard/search',
+    PERFORMANCE_METRICS: '/dashboard/performance',
   },
   NAV: {
     BASE: '/nav/mini',

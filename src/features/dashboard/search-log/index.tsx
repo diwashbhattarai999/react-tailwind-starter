@@ -3,7 +3,7 @@ import { Download, RefreshCcw, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const SearchLogPage = () => (
-  <div className='flex w-[100%] flex-1 flex-col'>
+  <div className='ml-64 flex w-[100%] flex-1 flex-col'>
     <div className='flex items-center justify-between border-b border-gray-200 px-3 py-4'>
       <div>
         <p className='text-lg font-semibold'>User Logs</p>
