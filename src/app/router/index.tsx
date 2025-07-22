@@ -4,11 +4,13 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
-import { ProtectedRoute } from '@/components/guards/protected-route';
 import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
+// import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
+import SearchLogPage from '@/features/dashboard/search-log';
+import UserJourney from '@/features/dashboard/user-journey';
 import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
 import { LandingPage } from '@/features/site';
 
@@ -19,7 +21,7 @@ import { Loader } from '../loader';
 const Login = lazy(() => import('@/features/auth/pages/login-page'));
 
 // Dashboard
-const Dashboard = lazy(() => import('@/features/dashboard/home'));
+// const Dashboard = lazy(() => import('@/features/dashboard/home'));
 
 export const router = createBrowserRouter([
   {
@@ -50,13 +52,14 @@ export const router = createBrowserRouter([
 
       // Protected dashboard routes
       {
-        Component: ProtectedRoute,
+        // Component: ProtectedRoute,
         children: [
           // Dashboard Routes
           {
             Component: DashboardLayout,
             children: [
-              { path: ROUTES.DASHBOARD.BASE, element: <Dashboard /> },
+              { path: ROUTES.DASHBOARD.BASE, element: <UserJourney /> },
+              { path: ROUTES.DASHBOARD.SEARCH, element: <SearchLogPage /> },
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
                 element: <NotFound showBackgroundGlow={false} />,

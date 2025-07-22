@@ -11,6 +11,7 @@ export const ROUTES = {
   DASHBOARD: {
     BASE: '/dashboard',
     SETTINGS: '/dashboard/settings',
+    SEARCH: '/dashboard/search',
   },
   NAV: {
     BASE: '/nav/mini',
