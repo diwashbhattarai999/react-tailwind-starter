@@ -10,6 +10,7 @@ export const ROUTES = {
   },
   DASHBOARD: {
     BASE: '/dashboard',
+    ANALYTICSOVERVIEW: '/analytics-overview',
     SETTINGS: '/dashboard/settings',
     SEARCH: '/dashboard/search',
     PERFORMANCE_METRICS: '/dashboard/performance',
