@@ -1,7 +1,6 @@
 import { TriangleAlert, UsersRound } from 'lucide-react';
 
 import Navbar from '@/components/layouts/navbar';
-import Sidebar from '@/components/layouts/sidebar';
 import { ErrorClusterCard } from '@/features/dashboard/error-clusters/components/error-cluster-list';
 
 import { CardDemo } from '../components/error-stats';
@@ -45,7 +44,6 @@ const clusters = [
 export default function ErrorDashboard() {
   return (
     <div>
-      <Sidebar />
 
       <Navbar
         description="Monitor and analyze error patterns across your application"

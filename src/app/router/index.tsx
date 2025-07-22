@@ -4,11 +4,19 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
-import { ProtectedRoute } from '@/components/guards/protected-route';
+import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
+// import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
+// eslint-disable-next-line no-duplicate-imports
 import { DashboardLayout } from '@/features/dashboard';
+import AnalyticsOverview from '@/features/dashboard/analytics-overview';
 import ErrorDashboard from '@/features/dashboard/error-clusters/pages/error.dashboard';
+// import { Dashboard } from '@/features/dashboard';
+import Dashboard from '@/features/dashboard/home';
+import PerformanceMetricsPage from '@/features/dashboard/performance-metrics';
+import SearchLogPage from '@/features/dashboard/search-log';
+import UserJourney from '@/features/dashboard/user-journey';
 import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
 import { LandingPage } from '@/features/site';
 
@@ -19,7 +27,7 @@ import { Loader } from '../loader';
 const Login = lazy(() => import('@/features/auth/pages/login-page'));
 
 // Dashboard
-const Dashboard = lazy(() => import('@/features/dashboard/home'));
+// const Dashboard = lazy(() => import('@/features/dashboard/home'));
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +39,8 @@ export const router = createBrowserRouter([
     children: [
       // Site routes
       { path: ROUTES.HOME, element: <LandingPage /> },
+      { path: ROUTES.NAV.BASE, element: <CombinedlogComp /> },
+
       { path: ROUTES.PORTAL, element: <PortalSelectionPage /> },
       // Auth routes (redirect authenticated users away)
       {
@@ -56,6 +66,10 @@ export const router = createBrowserRouter([
             children: [
               { path: ROUTES.DASHBOARD.BASE, element: <Dashboard /> },
               { path: ROUTES.DASHBOARD.ERROR_CLUSTERS, element: <ErrorDashboard /> },
+              { path: ROUTES.DASHBOARD.BASE, element: <UserJourney /> },
+              { path: ROUTES.DASHBOARD.ANALYTICSOVERVIEW, element: <AnalyticsOverview /> },
+              { path: ROUTES.DASHBOARD.SEARCH, element: <SearchLogPage /> },
+              { path: ROUTES.DASHBOARD.PERFORMANCE_METRICS, element: <PerformanceMetricsPage /> },
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
                 element: <NotFound showBackgroundGlow={false} />,

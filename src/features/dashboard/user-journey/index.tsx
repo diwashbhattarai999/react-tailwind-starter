@@ -19,12 +19,12 @@ function UserJourney() {
         <UjCards numberColorClass='text-uj-black' />
         <UjCards
           icon={sessionSVG}
-          number={16}
+          number='16'
           numberColorClass='text-uj-green'
           title='Active Sessions'
         />
-        <UjCards icon={errorSVG} number={17} numberColorClass='text-uj-red' title='With Errors' />
-        <UjCards icon={stepSVG} number={6} numberColorClass='text-uj-purple' title='Avg Steps' />
+        <UjCards icon={errorSVG} number='17' numberColorClass='text-uj-red' title='With Errors' />
+        <UjCards icon={stepSVG} number='6' numberColorClass='text-uj-purple' title='Avg Steps' />
       </div>
       <div className='absolute top-68 left-75 flex flex-col gap-2'>
         <UjDetailCards />

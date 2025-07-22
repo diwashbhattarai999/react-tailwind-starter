@@ -1,7 +1,10 @@
 import { Outlet } from 'react-router';
 
+import Sidebar from '@/components/layouts/sidebar';
+
 export const DashboardLayout = () => (
-  <div>
+  <div className='flex w-[100%]'>
+    <Sidebar />
     <Outlet />
   </div>
 );
