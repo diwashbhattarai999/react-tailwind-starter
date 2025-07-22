@@ -11,5 +11,6 @@ export const ROUTES = {
   DASHBOARD: {
     BASE: '/dashboard',
     SETTINGS: '/dashboard/settings',
+    ERROR_CLUSTERS: '/dashboard/error-clusters',
   },
 } as const;

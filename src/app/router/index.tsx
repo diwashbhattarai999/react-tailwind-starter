@@ -8,6 +8,7 @@ import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
+import ErrorDashboard from '@/features/dashboard/error-clusters/pages/error.dashboard';
 import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
 import { LandingPage } from '@/features/site';
 
@@ -47,13 +48,14 @@ export const router = createBrowserRouter([
 
       // Protected dashboard routes
       {
-        Component: ProtectedRoute,
+        // Component: ProtectedRoute,
         children: [
           // Dashboard Routes
           {
             Component: DashboardLayout,
             children: [
               { path: ROUTES.DASHBOARD.BASE, element: <Dashboard /> },
+              { path: ROUTES.DASHBOARD.ERROR_CLUSTERS, element: <ErrorDashboard /> },
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
                 element: <NotFound showBackgroundGlow={false} />,
