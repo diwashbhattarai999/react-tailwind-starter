@@ -9,6 +9,7 @@ import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
+import AnalyticsOverview from '@/features/dashboard/analytics-overview';
 import SearchLogPage from '@/features/dashboard/search-log';
 import UserJourney from '@/features/dashboard/user-journey';
 import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
@@ -59,6 +60,7 @@ export const router = createBrowserRouter([
             Component: DashboardLayout,
             children: [
               { path: ROUTES.DASHBOARD.BASE, element: <UserJourney /> },
+              { path: ROUTES.DASHBOARD.ANALYTICSOVERVIEW, element: <AnalyticsOverview /> },
               { path: ROUTES.DASHBOARD.SEARCH, element: <SearchLogPage /> },
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
