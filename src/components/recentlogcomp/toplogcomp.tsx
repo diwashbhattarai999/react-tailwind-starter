@@ -38,7 +38,7 @@ export default function Topmodal() {
 
   return (
     <>
-      <div className='flex justify-between gap-4'>
+      <div className='grid grid-cols-2 items-center justify-between gap-4 lg:grid-cols-4'>
         {miniLogArray.map(eh => (
           <div key={eh.id}>
             <Toplogmodal icon={eh.icon} rate={eh.rate} score={eh.score} title={eh.title} />
