@@ -21,8 +21,13 @@ export function OverviewCards({ title, data, className }: OverviewCardsProps) {
       <CardContent>
         <div className='space-y-4'>
           {data.map((item, index) => (
-            <div key={index} className='flex items-center justify-between gap-40'>
-              <span className='text-uj-black text-sm font-medium'>{item.name}</span>
+            <div
+              key={index}
+              className='flex flex-wrap items-center justify-between gap-2 sm:gap-40'
+            >
+              <span className='text-uj-black text-sm font-medium whitespace-nowrap'>
+                {item.name}
+              </span>
               <Badge variant='outline'>{item.count}</Badge>
             </div>
           ))}

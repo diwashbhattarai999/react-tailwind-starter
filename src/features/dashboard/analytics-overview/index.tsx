@@ -33,7 +33,7 @@ const topPages = [
 
 function AnalyticsOverview() {
   return (
-    <div className='flex h-screen w-screen flex-col'>
+    <div className='flex min-h-screen w-full flex-col'>
       {/* Navbar */}
       <Navbar
         description='Comprehensive analytics and insights from your healthcare platform logs'
@@ -41,8 +41,8 @@ function AnalyticsOverview() {
         title='Analytics Overview'
       />
 
-      {/* Stats Cards Row - Made compact */}
-      <div className='mt-25 flex justify-center gap-4'>
+      {/* Stats Cards Row - Made compact and responsive */}
+      <div className='mt-6 flex flex-wrap justify-center gap-4 px-4'>
         <UjCards icon={errorSVG} number='0%' numberColorClass='text-uj-red' title='Error RAate' />
         <UjCards
           icon={sessionSVG}
@@ -59,16 +59,15 @@ function AnalyticsOverview() {
         <UjCards icon={logsSVG} number='0' numberColorClass='text-uj-purple' title='Total Lags' />
       </div>
 
-      {/* Main Content - Uses remaining space without scrolling */}
-      <div className='mx-auto mt-4 grid flex-1 grid-cols-12 gap-4 p-4'>
-        {/* Performance Metrics - Full width */}
-
-        <div className='col-span-6'>
+      {/* Main Content - Responsive grid */}
+      <div className='mx-auto mt-4 grid w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-12'>
+        {/* Performance Metrics */}
+        <div className='sm:col-span-2 lg:col-span-6'>
           <PerformanceMetricsChart />
         </div>
 
-        {/* Status Badges - Compact */}
-        <div className='col-span-6'>
+        {/* Status Badges */}
+        <div className='sm:col-span-2 lg:col-span-6'>
           <Card className='h-full'>
             <CardHeader>
               <CardTitle className='text-xl'>Log Level Distribution</CardTitle>
@@ -102,14 +101,14 @@ function AnalyticsOverview() {
           </Card>
         </div>
 
-        {/* Overview Cards - Equal width */}
-        <div className='col-span-4'>
+        {/* Overview Cards */}
+        <div className='sm:col-span-1 lg:col-span-4'>
           <OverviewCards data={userRole} title='User Role Distribution' />
         </div>
-        <div className='col-span-4'>
+        <div className='sm:col-span-1 lg:col-span-4'>
           <OverviewCards data={topActions} title='Top Actions' />
         </div>
-        <div className='col-span-4'>
+        <div className='sm:col-span-1 lg:col-span-4'>
           <OverviewCards data={topPages} title='Top Pages' />
         </div>
       </div>

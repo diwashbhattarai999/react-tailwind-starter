@@ -21,26 +21,26 @@ const Navbar: React.FC<NavbarProps> = ({
   onExport,
   onRefresh,
 }) => (
-  <header className='border-features-border bg-bg-features absolute top-0 right-0 left-[16.024rem] z-50 flex h-[5.063rem] w-[78.5rem] items-center justify-between border-b p-4 opacity-100'>
-    <div className='w-2/3'>
-      {/* Title and Description */}
-      <h2 className='text-nav-text text-lg font-semibold opacity-100'>{title}</h2>
-      <p className='text-nav-subtext align-middle text-sm font-normal tracking-normal text-nowrap opacity-100'>
+  <header className='border-features-border bg-bg-features fixed top-0 z-50 flex w-full flex-col items-start justify-between border-b px-4 py-3 sm:h-[5.063rem] sm:w-[calc(100%-16.024rem)] sm:flex-row sm:items-center sm:pl-[16.024rem]'>
+    {/* Title and Description */}
+    <div className='w-full sm:w-2/3'>
+      <h2 className='text-nav-text text-lg font-semibold'>{title}</h2>
+      <p className='text-nav-subtext truncate text-sm font-normal tracking-normal whitespace-nowrap sm:whitespace-normal'>
         {description}
       </p>
     </div>
-    {/* Live Status */}
-    <div className='flex items-center gap-3'>
+
+    {/* Buttons and Live Status */}
+    <div className='mt-3 flex w-full flex-wrap items-center justify-start gap-3 sm:mt-0 sm:w-auto sm:justify-end'>
       {showLive && (
-        <div className='flex items-center justify-between gap-2'>
-          <span className='bg-uj-green h-2 w-2 rounded-full opacity-100' />
-          <p className='text-live-text text-sm font-normal opacity-100'>Live</p>
+        <div className='flex items-center gap-2'>
+          <span className='bg-uj-green h-2 w-2 rounded-full' />
+          <p className='text-live-text text-sm font-normal'>Live</p>
         </div>
       )}
-      {/* Hidable Export Button */}
       {showExport && (
         <Button
-          className='bg-bg-features border-features-border h-[2.5rem] w-[6.834rem] rounded-sm border text-[#0C0A09] opacity-100'
+          className='bg-bg-features border-features-border h-[2.5rem] w-auto rounded-sm border text-[#0C0A09]'
           variant='default'
           onClick={onExport}
         >
@@ -48,9 +48,8 @@ const Navbar: React.FC<NavbarProps> = ({
           Export
         </Button>
       )}
-      {/* Refresh Button */}
       <Button
-        className='bg-refresh-button text-uj-background h-[2.5rem] w-[7.186rem] rounded-sm opacity-100'
+        className='bg-refresh-button text-uj-background h-[2.5rem] w-auto rounded-sm'
         onClick={onRefresh}
       >
         <RefreshCw className='mr-2 h-4 w-4' />
