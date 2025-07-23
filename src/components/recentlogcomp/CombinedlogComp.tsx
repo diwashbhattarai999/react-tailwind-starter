@@ -4,7 +4,7 @@ import Topmodal from './toplogcomp';
 
 export default function CombinedlogComp() {
   return (
-    <div className='bg-foreground text-background px-6'>
+    <div className='max-w-[1258px] px-6'>
       <LogFilterComp />
       <div className=''>
         <Topmodal />

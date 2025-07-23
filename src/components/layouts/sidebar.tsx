@@ -32,7 +32,7 @@ const userInfoItems = [
 ];
 
 const Sidebar: React.FC = () => (
-  <aside className='border-sidebar-border border-r fixed top-0 left-0 flex h-screen w-64 flex-col  text-sm shadow-lg'>
+  <aside className='border-sidebar-border fixed top-0 left-0 flex h-screen w-64 flex-col border-r text-sm shadow-lg'>
     {/* Top section with logo and menu */}
 
     <div className='flex-1'>

@@ -21,13 +21,16 @@ export default function MainLog() {
     page: ['Profile', 'Appointments', 'Prescriptions', 'Payment', 'Login'],
     device: ['Android 14', 'Android 14', 'Android 14', 'Android 14', 'Android 14'],
     latency: ['238ms', '1.6s', '2.3s', '2.5s', '377ms'],
-    actions: ['View, Journey', 'View, Journey', 'View, Journey', 'View, Journey', 'View, Journey'],
+    actions: ['View', 'View', 'View', 'View', 'View'],
   };
 
   return (
-    <div>
-      <h2>Recent Logs</h2>
-      <div>
+    <div className='border-ring mt-6 rounded-md border px-5 py-2'>
+      <div className='flex items-center justify-between'>
+        <h2 className='text-semibold py-5 text-[1.18rem]'>Recent Logs</h2>
+        <h2 className='text-uj-subtext text-sm md:pr-18'>Auto Refresh:</h2>
+      </div>
+      <div className='w-full'>
         <InnerMain
           action={logData.action}
           actions={logData.actions}

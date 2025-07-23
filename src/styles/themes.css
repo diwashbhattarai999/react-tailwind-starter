@@ -51,6 +51,8 @@
   --status-bg-red: oklch(0.9705 0.0129 17.38);
   --profile-bg: oklch(0.9288 0.0126 255.51);
   --live-text: oklch(0.4455 0.0374 257.28);
+  --warning-text:#A16207;
+  --profile-bg:#E2E8F0;
 }
 
 .dark {
@@ -155,4 +157,6 @@
   --color-status-bg-blue: var(--status-bg-blue);
   --color-status-bg-red: var(--status-bg-red);
   --color-live-text: var(--live-text);
+  --color-warning-text:var(--warning-text);
+  --color-profile-bg:var(--profile-bg);
 }
