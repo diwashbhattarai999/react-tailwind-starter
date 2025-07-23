@@ -11,7 +11,7 @@ interface CardProps {
 
 export function CardDemo({ title, value, icon, valueColor }: CardProps) {
   return (
-    <Card className='w-full max-w-sm border-2 hover:border-primary transition-colors'>
+    <Card className='hover:border-primary w-full max-w-sm border-2 transition-colors'>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription className={`text-xl font-medium ${valueColor || ''}`}>

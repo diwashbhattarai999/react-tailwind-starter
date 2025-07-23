@@ -8,7 +8,6 @@ import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 // import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
-// eslint-disable-next-line no-duplicate-imports
 import { DashboardLayout } from '@/features/dashboard';
 import AnalyticsOverview from '@/features/dashboard/analytics-overview';
 import ErrorDashboard from '@/features/dashboard/error-clusters/pages/error.dashboard';

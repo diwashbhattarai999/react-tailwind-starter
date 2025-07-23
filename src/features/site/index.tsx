@@ -5,9 +5,6 @@ import LanguageSwitcher from '@/components/shared/language-switcher';
 import { Logo } from '@/components/shared/logo';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
 
-
-
-
 export function LandingPage() {
   const { t } = useTranslation('translation');
 
@@ -28,6 +25,5 @@ export function LandingPage() {
         </div>
       </div>
     </main>
-
   );
 }

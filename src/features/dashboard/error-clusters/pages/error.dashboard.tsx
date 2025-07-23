@@ -11,19 +11,19 @@ const errorStats = [
     title: 'Total Clusters',
     value: '11',
     valueColor: 'text-chart-1',
-    icon: <TriangleAlert className="text-chart-1 h-6 w-6" />,
+    icon: <TriangleAlert className='text-chart-1 h-6 w-6' />,
   },
   {
     title: 'Total Errors',
     value: '22',
     valueColor: 'text-chart-1',
-    icon: <TriangleAlert className="text-chart-1 h-6 w-6" />,
+    icon: <TriangleAlert className='text-chart-1 h-6 w-6' />,
   },
   {
     title: 'Affected Users',
     value: '17',
     valueColor: 'text-chart-1',
-    icon: <UsersRound className="text-chart-1 h-6 w-6" />,
+    icon: <UsersRound className='text-chart-1 h-6 w-6' />,
   },
 ];
 
@@ -44,30 +44,23 @@ const clusters = [
 export default function ErrorDashboard() {
   return (
     <div>
-
       <Navbar
-        description="Monitor and analyze error patterns across your application"
+        description='Monitor and analyze error patterns across your application'
         showExport={false}
         showLive={false}
-        title="Error Clusters"
+        title='Error Clusters'
       />
 
-      <main className="mt-24 ml-64 space-y-6 px-10 text-sm">
+      <main className='mt-24 ml-64 space-y-6 px-10 text-sm'>
         {/* Error Stats */}
-        <section className="flex space-x-4">
+        <section className='flex space-x-4'>
           {errorStats.map(({ title, value, icon, valueColor }, index) => (
-            <CardDemo
-              key={index}
-              icon={icon}
-              title={title}
-              value={value}
-              valueColor={valueColor}
-            />
+            <CardDemo key={index} icon={icon} title={title} value={value} valueColor={valueColor} />
           ))}
         </section>
 
         {/* Error Clusters */}
-        <section className="space-y-2">
+        <section className='space-y-2'>
           {clusters.map((cluster, index) => (
             <ErrorClusterCard key={index} {...cluster} />
           ))}
