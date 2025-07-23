@@ -1,6 +1,7 @@
 :root {
   --radius: 0.5rem;
   --green: oklch(0.596 0.1274 163.23);
+  --brown: oklch(0.6096 0.2034 90.36);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -96,6 +97,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-green: var(--green);
+  --color-brown: var(--brown);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
