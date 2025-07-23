@@ -168,7 +168,7 @@ importers:
         specifier: ^7.4.0
         version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       recharts:
-        specifier: 2.15.4
+        specifier: ^2.15.4
         version: 2.15.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       redux-persist:
         specifier: ^6.0.0
