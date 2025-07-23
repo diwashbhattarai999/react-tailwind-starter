@@ -9,6 +9,11 @@ import CombinedlogComp from '@/components/recentlogcomp/CombinedlogComp';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
+import AnalyticsOverview from '@/features/dashboard/analytics-overview';
+import ErrorDashboard from '@/features/dashboard/error-clusters/pages/error.dashboard';
+// import { Dashboard } from '@/features/dashboard';
+import Dashboard from '@/features/dashboard/home';
+import PerformanceMetricsPage from '@/features/dashboard/performance-metrics';
 import SearchLogPage from '@/features/dashboard/search-log';
 import UserJourney from '@/features/dashboard/user-journey';
 import PortalSelectionPage from '@/features/portal-selection/pages/portal-selection-page';
@@ -58,8 +63,12 @@ export const router = createBrowserRouter([
           {
             Component: DashboardLayout,
             children: [
+              { path: ROUTES.DASHBOARD.BASE, element: <Dashboard /> },
+              { path: ROUTES.DASHBOARD.ERROR_CLUSTERS, element: <ErrorDashboard /> },
               { path: ROUTES.DASHBOARD.BASE, element: <UserJourney /> },
+              { path: ROUTES.DASHBOARD.ANALYTICSOVERVIEW, element: <AnalyticsOverview /> },
               { path: ROUTES.DASHBOARD.SEARCH, element: <SearchLogPage /> },
+              { path: ROUTES.DASHBOARD.PERFORMANCE_METRICS, element: <PerformanceMetricsPage /> },
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
                 element: <NotFound showBackgroundGlow={false} />,

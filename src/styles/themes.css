@@ -1,6 +1,7 @@
 :root {
   --radius: 0.5rem;
   --green: oklch(0.596 0.1274 163.23);
+  --brown: oklch(0.6096 0.2034 90.36);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -42,6 +43,7 @@
   --uj-subtext: oklch(0.5534 0.0116 58.07);
   --uj-black: oklch(0.1469 0.0041 49.25);
   --uj-red: oklch(0.5771 0.2152 27.33);
+  --uj-blue: oklch(0.5461 0.2152 262.88);
   --uj-green: oklch(0.6271 0.1699 149.21);
   --uj-purple: oklch(0.5575 0.2525 302.32);
   --status-bg-green: oklch(0.9819 0.0181 155.83);
@@ -97,6 +99,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-green: var(--green);
+  --color-brown: var(--brown);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
@@ -148,6 +151,7 @@
   --color-uj-black: var(--uj-black);
   --color-uj-red: var(--uj-red);
   --color-uj-green: var(--uj-green);
+  --color-uj-blue: var(--uj-blue);
   --color-uj-purple: var(--uj-purple);
   --color-status-bg-green: var(--status-bg-green);
   --color-status-bg-blue: var(--status-bg-blue);
