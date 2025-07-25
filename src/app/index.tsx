@@ -1,27 +1,30 @@
 import { Outlet } from 'react-router';
 
-import { LanguageProvider } from '@/components/providers/language-provider';
 import { ReduxProvider } from '@/components/providers/redux-provider';
 import { TanstackProvider } from '@/components/providers/tanstack-provider';
-import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { AuthProvider } from '@/contexts/auth-context';
+import { LanguageProvider } from '@/contexts/language-context';
+import { ThemeProvider } from '@/contexts/theme-context';
 
 import { NetworkStatus } from './network-status';
 
 function App() {
   return (
     <ReduxProvider>
-      <TanstackProvider>
-        <ThemeProvider>
-          <LanguageProvider>
-            <Outlet />
+      <AuthProvider>
+        <TanstackProvider>
+          <ThemeProvider>
+            <LanguageProvider>
+              <Outlet />
 
-            <NetworkStatus />
+              <NetworkStatus />
 
-            <Toaster />
-          </LanguageProvider>
-        </ThemeProvider>
-      </TanstackProvider>
+              <Toaster />
+            </LanguageProvider>
+          </ThemeProvider>
+        </TanstackProvider>
+      </AuthProvider>
     </ReduxProvider>
   );
 }

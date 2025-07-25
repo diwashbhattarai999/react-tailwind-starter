@@ -12,9 +12,6 @@ export type Language = (typeof LANGUAGES)[number];
  * i18n configuration for internationalization
  * This file initializes i18next with the necessary configurations and language resources.
  * It sets up English and Nepali translations and configures the default language.
- *
- * The `escapeValue` option is set to false to prevent escaping of values in translations.
- * This is useful for React applications where HTML tags might be included in translations.
  */
 void i18n
   .use(LanguageDetector)

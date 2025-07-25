@@ -2,7 +2,7 @@ import { ChevronDown, Languages } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import { useLanguage } from '../providers/language-provider';
+import { useLanguage } from '../../contexts/language-context';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 /**

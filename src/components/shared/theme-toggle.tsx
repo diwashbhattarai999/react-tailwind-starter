@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Moon, Sun } from 'lucide-react';
 
@@ -5,7 +7,7 @@ import { Button, type ButtonProps } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 
-import { useTheme } from '../providers/theme-provider';
+import { useTheme } from '../../contexts/theme-context';
 
 const themeToggleVariants = cva('font-normal', {
   variants: {
@@ -27,17 +29,34 @@ export function ThemeToggle({
   className,
   toggleVariant,
   asChild = false,
-  onClick,
   ...props
 }: ThemeToggleProps) {
   const Comp = asChild ? Slot : Button;
 
   const { theme, setTheme } = useTheme();
 
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    onClick?.(e);
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  const handleThemeToggle = useCallback(
+    (e?: React.MouseEvent) => {
+      const newMode = theme === 'dark' ? 'light' : 'dark';
+      const root = document.documentElement;
+
+      if (!document.startViewTransition) {
+        setTheme(newMode);
+        return;
+      }
+
+      // Set coordinates from the click event
+      if (e) {
+        root.style.setProperty('--x', `${e.clientX}px`);
+        root.style.setProperty('--y', `${e.clientY}px`);
+      }
+
+      document.startViewTransition(() => {
+        setTheme(newMode);
+      });
+    },
+    [theme, setTheme]
+  );
 
   return (
     <Comp
@@ -45,7 +64,7 @@ export function ThemeToggle({
       className={cn(themeToggleVariants({ toggleVariant, className }))}
       size={props.size || 'sm'}
       variant={props.variant || 'ghost'}
-      onClick={handleOnClick}
+      onClick={handleThemeToggle}
       {...props}
     >
       {theme === 'dark' ? (

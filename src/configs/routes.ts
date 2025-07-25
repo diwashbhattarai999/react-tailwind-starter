@@ -16,4 +16,7 @@ export const ROUTES = {
   NAV: {
     BASE: '/nav/mini',
   },
+  ERROR: {
+    INTERNAL_SERVER_ERROR: '/500',
+  },
 } as const;
