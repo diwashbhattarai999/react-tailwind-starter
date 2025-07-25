@@ -12,6 +12,7 @@ export const PageLoader = ({ className }: LoaderProps) => (
       className
     )}
   >
+    <div>Loading .... </div>
     <svg
       aria-hidden='true'
       className='fill-foreground text-muted size-6 animate-spin'
