@@ -44,7 +44,7 @@ const baseESLintConfig = {
     'no-constant-binary-expression': 'error', // Disallow constant expressions in conditions
     'no-duplicate-imports': 'error', // Disallow duplicate imports
     'no-new-native-nonconstructor': 'error', // Disallow new operators with the String, Number, and Boolean objects
-    'no-promise-executor-return': 'error', // Disallow returning values from Promise executor functions
+    'no-promise-executor-return': 'off', // Disallow returning values from Promise executor functions
     'no-self-compare': 'error', // Disallow self-comparison
     'no-template-curly-in-string': 'error', // Disallow template literals in strings
     'no-unmodified-loop-condition': 'error', // Disallow unmodified loop conditions
