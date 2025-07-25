@@ -1,4 +1,4 @@
-import type { Theme } from '@/components/providers/theme-provider';
+import type { Theme } from '@/contexts/theme-context';
 import type { Language } from '@/i18n';
 
 interface SiteConfig {

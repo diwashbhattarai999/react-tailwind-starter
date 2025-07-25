@@ -236,7 +236,7 @@ const testConfig = {
   rules: {
     'max-len': 'off', // Allow long lines in test files
     '@typescript-eslint/no-explicit-any': 'off', // Allow 'any' in test files
-    'no-console': 'off', // Allow console logs in tests
+    'no-console': 'error', // Allow console logs in tests
   },
 };
 

@@ -11,4 +11,7 @@ export const ROUTES = {
     BASE: '/dashboard',
     SETTINGS: '/dashboard/settings',
   },
+  ERROR: {
+    INTERNAL_SERVER_ERROR: '/500',
+  },
 } as const;
