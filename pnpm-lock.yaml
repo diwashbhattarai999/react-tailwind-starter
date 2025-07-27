@@ -113,6 +113,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.69.0
         version: 5.81.5(react@19.1.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.83.0
+        version: 5.83.0(@tanstack/react-query@5.81.5(react@19.1.0))(react@19.1.0)
       '@tanstack/react-table':
         specifier: ^8.21.2
         version: 8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1662,6 +1665,15 @@ packages:
 
   '@tanstack/query-core@5.81.5':
     resolution: {integrity: sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q==}
+
+  '@tanstack/query-devtools@5.81.2':
+    resolution: {integrity: sha512-jCeJcDCwKfoyyBXjXe9+Lo8aTkavygHHsUHAlxQKKaDeyT0qyQNLKl7+UyqYH2dDF6UN/14873IPBHchcsU+Zg==}
+
+  '@tanstack/react-query-devtools@5.83.0':
+    resolution: {integrity: sha512-yfp8Uqd3I1jgx8gl0lxbSSESu5y4MO2ThOPBnGNTYs0P+ZFu+E9g5IdOngyUGuo6Uz6Qa7p9TLdZEX3ntik2fQ==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.83.0
+      react: ^18 || ^19
 
   '@tanstack/react-query@5.81.5':
     resolution: {integrity: sha512-lOf2KqRRiYWpQT86eeeftAGnjuTR35myTP8MXyvHa81VlomoAWNEd8x5vkcAfQefu0qtYCvyqLropFZqgI2EQw==}
@@ -5437,6 +5449,14 @@ snapshots:
       vite: 6.3.5(@types/node@22.15.29)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0)
 
   '@tanstack/query-core@5.81.5': {}
+
+  '@tanstack/query-devtools@5.81.2': {}
+
+  '@tanstack/react-query-devtools@5.83.0(@tanstack/react-query@5.81.5(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/query-devtools': 5.81.2
+      '@tanstack/react-query': 5.81.5(react@19.1.0)
+      react: 19.1.0
 
   '@tanstack/react-query@5.81.5(react@19.1.0)':
     dependencies:

@@ -13,6 +13,7 @@ import {
   type QueryClientConfig,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 /**
  * TanstackProvider component that wraps the application with Tanstack Query Client.
@@ -88,5 +89,10 @@ export const TanstackProvider = ({ children }: Readonly<{ children: React.ReactN
   const queryClient = new QueryClient(queryClientConfig);
 
   // Return the QueryClientProvider with the created queryClient and children components
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 };

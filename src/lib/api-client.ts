@@ -86,10 +86,12 @@ const createApiInstance = ({
     // Use provided onResponseError interceptor or default one
     interceptors?.onResponseError ??
       (async (error: AxiosError) => {
+        // eslint-disable-next-line no-console
         console.error('[API Response Error]:', error);
 
         // Handle 401 Unauthorized: Refresh token if needed
         if (error.response?.status === 401) {
+          // eslint-disable-next-line no-console
           console.warn('Unauthorized! Attempting token refresh...');
           // Handle token refresh logic here (if applicable)
         }
@@ -105,20 +107,4 @@ const createApiInstance = ({
 export const apiClient = createApiInstance({
   baseUrl: ENV.APIS.BASE_URL,
   apiKey: ENV.APIS.API_KEY,
-  interceptors: {
-    onRequest: config => {
-      console.log('Request made with ', config);
-      return config;
-    },
-    onResponse: response => {
-      console.log('Response received', response);
-      return response;
-    },
-    onResponseError: async error => {
-      console.error('Response error', error);
-      return Promise.reject(error);
-    },
-  },
 });
-
-// More API instances can be created similarly...

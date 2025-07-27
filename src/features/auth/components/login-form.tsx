@@ -33,6 +33,7 @@ export const LoginForm = () => {
   const isPending = form.formState.isSubmitting;
 
   const onSubmit = (data: LoginFormData) => {
+    // eslint-disable-next-line no-console
     console.log('Submitting login form:', data);
   };
 
