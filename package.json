@@ -31,7 +31,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "fix-all": "pnpm lint:fix && pnpm format",
-    "type-check": "tsc --noEmit --incremental",
+    "type-check": "tsc --noEmit",
     "upgrade": "npx npm-check-updates -u && pnpm install",
     "prepare": "husky",
     "commit": "cz",
