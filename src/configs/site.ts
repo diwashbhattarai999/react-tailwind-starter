@@ -15,7 +15,7 @@ export const SITE_CONFIG: SiteConfig = {
   name: 'Foundation React Template',
   description:
     'A production-ready React template setup with Vite, TypeScript, ESLint, Prettier, Tailwind, React Hook Form, Zod, and more.',
-  url: '',
+  url: 'http://localhost:8000',
   themeStorageKey: 'foundation-react-template-theme',
   languageStorageKey: 'foundation-react-template-language',
   defaultLanguage: 'en',
