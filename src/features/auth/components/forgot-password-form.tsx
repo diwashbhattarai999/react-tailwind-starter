@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 
-import { LogIn } from 'lucide-react';
+import { ArrowLeft, Mail } from 'lucide-react';
 
 import { FormErrorMessage } from '@/components/shared/form-message';
 import { Button } from '@/components/ui/button';
@@ -17,21 +17,24 @@ import { Input } from '@/components/ui/input';
 import { ROUTES } from '@/configs/routes';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useLogin } from '../hooks/use-login';
-import { type LoginFormData, loginSchema } from '../schema/login-schema';
+import { useForgotPassword } from '../hooks/use-forgot-password';
+import {
+  type ForgotPasswordFormData,
+  forgotPasswordSchema,
+} from '../schema/forgot-password-schema';
 
-export const LoginForm = () => {
-  const { mutate: loginUser, isPending } = useLogin();
+export const ForgotPasswordForm = () => {
+  const { mutate: forgotPassword, isPending } = useForgotPassword();
 
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordSchema),
     mode: 'all',
   });
 
   const errorMessage = form.formState.errors?.root?.message || '';
 
-  const onSubmit = (data: LoginFormData) => {
-    loginUser(data);
+  const onSubmit = (data: ForgotPasswordFormData) => {
+    forgotPassword(data);
   };
 
   return (
@@ -58,36 +61,6 @@ export const LoginForm = () => {
           )}
         />
 
-        {/* Password */}
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='mb-1'>Password</FormLabel>
-              <FormControl>
-                <Input
-                  error={form.formState.errors.password?.message}
-                  placeholder='**********'
-                  type='password'
-                  {...field}
-                  className='bg-background/20 h-14 rounded-full px-4'
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className='-mt-4 flex w-full items-center justify-between'>
-          <Link
-            className='text-primary text-sm font-semibold hover:underline'
-            to={ROUTES.AUTH.FORGOT_PASSWORD}
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
         {/* Error Message */}
         <FormErrorMessage error={errorMessage} />
 
@@ -95,21 +68,22 @@ export const LoginForm = () => {
         <Button
           className='h-14 w-full gap-4 rounded-full'
           isLoading={isPending}
-          loadingText='Logging in...'
+          loadingText='Sending reset link...'
           type='submit'
         >
-          <LogIn />
-          Login
+          <Mail />
+          Send Reset Link
         </Button>
 
-        {/* Register Link */}
+        {/* Back to Login Link */}
         <div className='text-center'>
-          <p className='text-foreground/70 text-sm'>
-            Don't have an account?{' '}
-            <Link className='text-primary font-semibold hover:underline' to={ROUTES.AUTH.REGISTER}>
-              Sign up
-            </Link>
-          </p>
+          <Link
+            className='text-primary inline-flex items-center gap-2 text-sm font-semibold hover:underline'
+            to={ROUTES.AUTH.LOGIN}
+          >
+            <ArrowLeft size={16} />
+            Back to Login
+          </Link>
         </div>
       </form>
     </Form>

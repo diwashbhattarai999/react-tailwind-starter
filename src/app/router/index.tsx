@@ -14,6 +14,8 @@ import { ErrorFallback } from '../error-fallback';
 
 // Auth
 const Login = lazy(() => import('@/features/auth/pages/login-page'));
+const Register = lazy(() => import('@/features/auth/pages/register-page'));
+const ForgotPassword = lazy(() => import('@/features/auth/pages/forgot-password-page'));
 
 // Dashboard
 const Dashboard = lazy(() => import('@/features/dashboard/home'));
@@ -38,6 +40,8 @@ export const router = createBrowserRouter([
             children: [
               { path: ROUTES.AUTH.BASE, element: <Navigate replace to={ROUTES.AUTH.LOGIN} /> },
               { path: ROUTES.AUTH.LOGIN, element: withSuspense(Login) },
+              { path: ROUTES.AUTH.REGISTER, element: withSuspense(Register) },
+              { path: ROUTES.AUTH.FORGOT_PASSWORD, element: withSuspense(ForgotPassword) },
             ],
           },
         ],

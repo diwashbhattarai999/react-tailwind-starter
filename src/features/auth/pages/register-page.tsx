@@ -1,9 +1,9 @@
 import Logo from '@/assets/logo.png';
 import { BackgroundGlow } from '@/components/shared/background-glow';
 
-import { LoginForm } from '../components/login-form';
+import { RegisterForm } from '../components/register-form';
 
-const LoginPage = () => (
+const RegisterPage = () => (
   <div className='relative flex min-h-screen'>
     {/* Background glow */}
     <BackgroundGlow />
@@ -19,14 +19,16 @@ const LoginPage = () => (
 
       {/* Heading and description */}
       <div className='space-y-2 text-center'>
-        <h2 className='text-3xl font-bold'>Welcome Back!</h2>
-        <p className='text-foreground/70'>Please enter your credentials to access your account.</p>
+        <h2 className='text-3xl font-bold'>Create Account</h2>
+        <p className='text-foreground/70'>
+          Please fill in your information to create your account.
+        </p>
       </div>
 
       {/* Form */}
-      <LoginForm />
+      <RegisterForm />
     </div>
   </div>
 );
 
-export default LoginPage;
+export default RegisterPage;

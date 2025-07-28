@@ -1,9 +1,9 @@
 import Logo from '@/assets/logo.png';
 import { BackgroundGlow } from '@/components/shared/background-glow';
 
-import { LoginForm } from '../components/login-form';
+import { ForgotPasswordForm } from '../components/forgot-password-form';
 
-const LoginPage = () => (
+const ForgotPasswordPage = () => (
   <div className='relative flex min-h-screen'>
     {/* Background glow */}
     <BackgroundGlow />
@@ -19,14 +19,16 @@ const LoginPage = () => (
 
       {/* Heading and description */}
       <div className='space-y-2 text-center'>
-        <h2 className='text-3xl font-bold'>Welcome Back!</h2>
-        <p className='text-foreground/70'>Please enter your credentials to access your account.</p>
+        <h2 className='text-3xl font-bold'>Reset Password</h2>
+        <p className='text-foreground/70'>
+          Enter your email address and we'll send you a link to reset your password.
+        </p>
       </div>
 
       {/* Form */}
-      <LoginForm />
+      <ForgotPasswordForm />
     </div>
   </div>
 );
 
-export default LoginPage;
+export default ForgotPasswordPage;
