@@ -5,7 +5,7 @@ import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
 import { ProtectedRoute } from '@/components/guards/protected-route';
-import { withSuspense } from '@/components/shared/with-suspense';
+import { withSuspense } from '@/components/layouts/with-suspense';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
@@ -17,21 +17,20 @@ const Login = lazy(() => import('@/features/auth/pages/login-page'));
 const Register = lazy(() => import('@/features/auth/pages/register-page'));
 const ForgotPassword = lazy(() => import('@/features/auth/pages/forgot-password-page'));
 
-// Dashboard
 const Dashboard = lazy(() => import('@/features/dashboard/home'));
 const LandingPage = lazy(() => import('@/features/landing-page/index'));
 
 export const router = createBrowserRouter([
   {
-    // Layout wraps all routes
+    // Root route
     Component: App,
     ErrorBoundary: ErrorFallback,
 
     children: [
-      // Site routes
+      // Site routes ( Public / Unprotected )
       { path: ROUTES.HOME, element: withSuspense(LandingPage) },
 
-      // Auth routes (redirect authenticated users away)
+      // Auth routes
       {
         Component: AuthRedirect,
         children: [
@@ -47,7 +46,7 @@ export const router = createBrowserRouter([
         ],
       },
 
-      // Protected dashboard routes
+      // Protected routes
       {
         Component: ProtectedRoute,
         children: [
@@ -56,6 +55,8 @@ export const router = createBrowserRouter([
             Component: DashboardLayout,
             children: [
               { path: ROUTES.DASHBOARD.BASE, element: withSuspense(Dashboard) },
+
+              // Catch-all for dashboard routes
               {
                 path: `${ROUTES.DASHBOARD.BASE}/*`,
                 element: <NotFound showBackgroundGlow={false} />,
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
         ],
       },
 
-      // Fallback for unmatched routes
+      // Catch-all route for unmatched routes
       { path: '*', element: <NotFound className='min-h-screen' /> },
     ],
   },
