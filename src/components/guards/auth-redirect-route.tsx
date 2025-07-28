@@ -4,8 +4,8 @@ import { ROUTES } from '@/configs/routes';
 import { useAuth } from '@/contexts/auth-context';
 
 /**
- * AuthRedirect: Redirects authenticated users away from auth pages
- * (e.g., login/register) back to dashboard or another protected page.
+ * AuthRedirect component that redirects authenticated users to the dashboard.
+ * If the user is not authenticated, it renders the child routes (auth pages).
  */
 export function AuthRedirect() {
   const { isAuthenticated } = useAuth();

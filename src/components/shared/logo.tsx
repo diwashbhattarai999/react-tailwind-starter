@@ -1,7 +1,14 @@
 import { Link } from 'react-router';
 
+import { ROUTES } from '@/configs/routes';
 import { cn } from '@/lib/utils';
 
+/**
+ * SVGLogo component that renders the application logo as an SVG.
+ * It can be used with a custom class name.
+ *
+ * @param {string} [props.className] - Optional class name for the SVG element.
+ */
 const SVGLogo = ({ className }: { className?: string }) => (
   <svg
     className={cn('size-20', className)}
@@ -37,6 +44,13 @@ const SVGLogo = ({ className }: { className?: string }) => (
   </svg>
 );
 
+/**
+ * Logo component that renders the application logo.
+ * It uses an SVG image and wraps it in a Link to the home page.
+ *
+ * @param {string} [props.wrapperClassName] - Optional class name for the wrapper element.
+ * @param {string} [props.className] - Optional class name for the SVG element.
+ */
 export const Logo = ({
   wrapperClassName,
   className,
@@ -44,7 +58,7 @@ export const Logo = ({
   wrapperClassName?: string;
   className?: string;
 }) => (
-  <Link className={cn(wrapperClassName)} to='/'>
+  <Link className={cn(wrapperClassName)} to={ROUTES.HOME}>
     <SVGLogo className={cn('size-20', className)} />
   </Link>
 );

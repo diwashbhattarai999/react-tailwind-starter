@@ -9,17 +9,29 @@ import { ThemeProvider } from '@/contexts/theme-context';
 
 import { NetworkStatus } from './network-status';
 
-function App() {
+/**
+ * Main App Component
+ * Wraps the application with necessary providers for state management, authentication, theming and internationalization.
+ * It includes the ReduxProvider, AuthProvider, TanstackProvider, ThemeProvider, and LanguageProvider.
+ *
+ * - `Outlet` is used to render the child routes defined in the router configuration.
+ * - `NetworkStatus` component is included to monitor and display network connectivity status.
+ * - `Toaster` is used to display notifications and messages throughout the application.
+ */
+export default function App() {
   return (
     <ReduxProvider>
       <AuthProvider>
         <TanstackProvider>
           <ThemeProvider>
             <LanguageProvider>
+              {/* Render child routes */}
               <Outlet />
 
+              {/* Network Status - Online/Offline Indicator */}
               <NetworkStatus />
 
+              {/* Toaster for notifications */}
               <Toaster />
             </LanguageProvider>
           </ThemeProvider>
@@ -28,5 +40,3 @@ function App() {
     </ReduxProvider>
   );
 }
-
-export default App;

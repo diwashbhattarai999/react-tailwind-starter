@@ -4,8 +4,9 @@ import { ROUTES } from '@/configs/routes';
 import { useAuth } from '@/contexts/auth-context';
 
 /**
- * ProtectedRoute component restricts access to child routes
- * if the user is not authenticated.
+ * ProtectedRoute component that checks if the user is authenticated.
+ * If not authenticated, it redirects to the login page.
+ * If authenticated, it renders the child routes.
  */
 export function ProtectedRoute() {
   const { isAuthenticated } = useAuth();

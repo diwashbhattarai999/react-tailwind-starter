@@ -6,6 +6,7 @@ import { Bug, RefreshCw } from 'lucide-react';
 import brokenHeart from '@/assets/error.svg';
 import { Button } from '@/components/ui/button';
 
+// Check if the app is in development mode
 const isDev = import.meta.env.DEV;
 
 /**
@@ -92,6 +93,7 @@ export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () 
   const error = useRouteError() as Error;
   const navigate = useNavigate();
 
+  // Handle reset error action
   const handleResetError = () => {
     if (resetErrorBoundary) {
       resetErrorBoundary();
@@ -141,8 +143,6 @@ export const ErrorFallback = ({ resetErrorBoundary }: { resetErrorBoundary?: () 
             <img alt={t('image_alt')} className='h-auto w-full' src={brokenHeart} />
           </div>
         )}
-
-        {/* <NetworkStatusIndicator /> */}
       </div>
     </div>
   );

@@ -12,17 +12,20 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
  * It utilizes the useLanguage hook to access the current language and a function to change it.
  */
 export default function LanguageSwitcher() {
+  // Get the current language, function to set language, available languages, and display names from the context
   const { language, setLanguage, getAvailableLanguages, getDisplayName } = useLanguage();
 
   return (
     <div className='flex items-end'>
       <Popover>
+        {/* PopoverTrigger is the button that opens the language selection menu */}
         <PopoverTrigger className='focus:ring-primary bg-accent text-accent-foreground hover:bg-muted flex cursor-pointer items-center gap-1 rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none'>
           <Languages size={18} />
           {getDisplayName(language)}
           <ChevronDown size={12} />
         </PopoverTrigger>
 
+        {/* PopoverContent contains the list of available languages */}
         <PopoverContent className='popover-w-full flex flex-col gap-1 p-1 text-sm'>
           {getAvailableLanguages().map(({ locale, name }) => {
             const isSelected = language === locale;

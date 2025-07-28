@@ -97,11 +97,12 @@ export function LanguageProvider({
  * This hook provides access to the current language and a function to change it.
  */
 export const useLanguage = () => {
+  // Get the context value
   const context = useContext(LanguageProviderContext);
 
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
+  // Throw an error if the context is undefined, indicating that the hook must be used within a LanguageProvider
+  if (context === undefined) throw new Error('useLanguage must be used within a LanguageProvider');
 
+  // Return the context value
   return context;
 };

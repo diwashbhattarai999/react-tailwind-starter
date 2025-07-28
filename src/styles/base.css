@@ -17,16 +17,6 @@
     transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
-
-  /* Hide scrollbar for all browsers */
-  .hide-scrollbar {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
 }
 
 /* Radix UI utilities */

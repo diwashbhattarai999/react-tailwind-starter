@@ -1,3 +1,8 @@
+/**
+ * Routes configuration for the application.
+ * This file defines the paths used throughout the application.
+ * Each route is categorized for better organization.
+ */
 export const ROUTES = {
   HOME: '/',
   AUTH: {

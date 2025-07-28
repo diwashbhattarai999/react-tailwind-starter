@@ -17,6 +17,7 @@ const Login = lazy(() => import('@/features/auth/pages/login-page'));
 const Register = lazy(() => import('@/features/auth/pages/register-page'));
 const ForgotPassword = lazy(() => import('@/features/auth/pages/forgot-password-page'));
 
+// UnAuth
 const Dashboard = lazy(() => import('@/features/dashboard/home'));
 const LandingPage = lazy(() => import('@/features/landing-page/index'));
 

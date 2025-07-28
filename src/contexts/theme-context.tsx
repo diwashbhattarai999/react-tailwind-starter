@@ -52,6 +52,7 @@ export function ThemeProvider({
     // Add the class to disable transitions
     root.classList.add('disable-transitions');
 
+    // If the theme is 'system', check the user's system preference and set the theme accordingly
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
@@ -61,6 +62,7 @@ export function ThemeProvider({
       return;
     }
 
+    // Add the current theme class to the root element
     root.classList.add(theme);
 
     // Remove the class after a short delay to re-enable transitions
@@ -91,9 +93,12 @@ export function ThemeProvider({
  * This hook provides access to the current theme and a function to change it.
  */
 export const useTheme = () => {
+  // Get the context value
   const context = useContext(ThemeProviderContext);
 
+  // Throw an error if the context is undefined, indicating that the hook must be used within a ThemeProvider
   if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
 
+  // Return the context value
   return context;
 };

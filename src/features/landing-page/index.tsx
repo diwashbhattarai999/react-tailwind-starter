@@ -36,10 +36,10 @@ export default function LandingPage() {
             <h1 className='text-2xl tracking-wider'>Count: {count}</h1>
 
             <div className='flex items-center justify-center gap-x-4'>
-              <Button className='h-12 w-24' onClick={() => dispatch(decrement())}>
+              <Button className='h-12 w-24 text-xl' onClick={() => dispatch(decrement())}>
                 -
               </Button>
-              <Button className='h-12 w-24' onClick={() => dispatch(increment())}>
+              <Button className='h-12 w-24 text-xl' onClick={() => dispatch(increment())}>
                 +
               </Button>
               <Button className='h-12 w-24' onClick={() => dispatch(incrementByAmount(5))}>

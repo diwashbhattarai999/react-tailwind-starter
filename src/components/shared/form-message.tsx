@@ -2,6 +2,7 @@ import { CircleCheck, CircleX } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
+// Interface for the FormErrorMessage component props
 interface FormErrorProps {
   error?: string | null;
   className?: string;
@@ -16,7 +17,7 @@ interface FormErrorProps {
 const FormErrorMessage = ({ error, className }: FormErrorProps) => {
   if (!error) return null;
 
-  const message = error || 'An unexpected error occurred. Please try again later.';
+  const message = error || 'Something went wrong. Please try again later.';
 
   return (
     <div
@@ -31,6 +32,7 @@ const FormErrorMessage = ({ error, className }: FormErrorProps) => {
   );
 };
 
+// Interface for the FormSuccessMessage component props
 interface FormSuccessProps {
   children: React.ReactNode;
 }

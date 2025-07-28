@@ -2,12 +2,20 @@ import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
+/**
+ * NetworkStatus component to monitor and display network connectivity status.
+ *
+ * This component listens for online and offline events and displays a message
+ * when the user goes offline or comes back online.
+ */
 export const NetworkStatus = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [type, setType] = useState<'success' | 'error' | 'info' | null>(null);
   const [wasOffline, setWasOffline] = useState(navigator.onLine === false);
 
+  // Effect to handle online and offline events
   useEffect(() => {
+    // Handler for when the user comes back online
     const handleOnline = () => {
       if (wasOffline) {
         setMessage('You are back online!');
@@ -21,12 +29,14 @@ export const NetworkStatus = () => {
       }
     };
 
+    // Handler for when the user goes offline
     const handleOffline = () => {
       setMessage('You are offline. Please check your internet connection and try again.');
       setType('error');
       setWasOffline(true); // So we can detect when they come back online
     };
 
+    // Add event listeners for online and offline events
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
@@ -35,12 +45,14 @@ export const NetworkStatus = () => {
       handleOffline();
     }
 
+    // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
   }, [wasOffline]);
 
+  // If no message or type, do not render anything
   if (!message || !type) return null;
 
   return (

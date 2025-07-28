@@ -4,14 +4,24 @@ interface LoaderProps {
   className?: string;
 }
 
+/**
+ * PageLoader component to display a loading spinner while the page is loading.
+ *
+ * This component is used to indicate that the page is in the process of loading,
+ * providing a visual cue to the user.
+ *
+ * @param {string} [props.className] - Additional class names for styling.
+ */
 export const PageLoader = ({ className }: LoaderProps) => (
   <div
+    aria-label='Loading...'
     role='status'
     className={cn(
       'bg-background relative flex min-h-screen items-center justify-center',
       className
     )}
   >
+    {/* Svg loader */}
     <svg
       aria-hidden='true'
       className='fill-foreground text-muted size-6 animate-spin'

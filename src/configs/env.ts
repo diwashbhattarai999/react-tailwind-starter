@@ -6,22 +6,19 @@
 
 export const ENV = {
   /**
-   * The current environment of the application.
-   * Can be one of 'development', 'production', 'staging', or 'test'.
-   */
-  NODE_ENV: process.env.NODE_ENV,
-
-  /**
    * The port number on which the application runs during development.
    */
-  VITE_PORT: import.meta.env.VITE_PORT,
+  PORT: import.meta.env.VITE_PORT,
 
   /**
-   * API configurations for various services.
-   * Each service has a base URL and an API key for authentication.
+   * The base URL for the API that the application interacts with.
+   * This is typically used for making network requests to the backend.
    */
-  APIS: {
-    BASE_URL: import.meta.env.VITE_API_URL,
-    API_KEY: import.meta.env.VITE_API_KEY,
-  },
+  API_URL: import.meta.env.VITE_API_URL,
+
+  /**
+   * The API key used for accessing third-party services or APIs.
+   * This should be kept secret and not exposed in the client-side code.
+   */
+  API_KEY: import.meta.env.VITE_API_KEY,
 };

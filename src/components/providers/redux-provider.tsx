@@ -15,6 +15,7 @@ import { persistor, store } from '@/store';
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
+      {/* PersistGate delays the rendering of children until the persisted state has been retrieved and saved to Redux store */}
       <PersistGate loading={null} persistor={persistor}>
         {children}
       </PersistGate>

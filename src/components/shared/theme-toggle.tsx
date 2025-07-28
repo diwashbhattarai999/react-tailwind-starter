@@ -4,11 +4,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Moon, Sun } from 'lucide-react';
 
 import { Button, type ButtonProps } from '@/components/ui/button';
+import { useTheme } from '@/contexts/theme-context';
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 
-import { useTheme } from '../../contexts/theme-context';
-
+// Variants for the ThemeToggle component
 const themeToggleVariants = cva('font-normal', {
   variants: {
     toggleVariant: {
@@ -21,36 +21,50 @@ const themeToggleVariants = cva('font-normal', {
   },
 });
 
+// Interface for the ThemeToggle component props
 export interface ThemeToggleProps extends ButtonProps, VariantProps<typeof themeToggleVariants> {
   asChild?: boolean;
 }
 
+/**
+ * ThemeToggle component to switch between light and dark modes.
+ * It uses the `useTheme` context to manage the theme state.
+ * The component can be used as a button or any other element by passing `asChild`.
+ */
 export function ThemeToggle({
   className,
   toggleVariant,
   asChild = false,
   ...props
 }: ThemeToggleProps) {
+  // Use Slot if asChild is true, otherwise use Button
   const Comp = asChild ? Slot : Button;
 
+  // Get the current theme and the function to set the theme from the context
   const { theme, setTheme } = useTheme();
 
+  // Handler to toggle the theme
   const handleThemeToggle = useCallback(
     (e?: React.MouseEvent) => {
+      // Determine the new theme based on the current theme
       const newMode = theme === 'dark' ? 'light' : 'dark';
       const root = document.documentElement;
 
+      // If the browser does not support view transitions, set the theme directly
       if (!document.startViewTransition) {
         setTheme(newMode);
         return;
       }
 
-      // Set coordinates from the click event
+      // If the event exists, set CSS variables for the transition effect
+      // This allows for a smooth transition effect based on the mouse position
+      // This is useful for creating a ripple effect when the theme is toggled
       if (e) {
         root.style.setProperty('--x', `${e.clientX}px`);
         root.style.setProperty('--y', `${e.clientY}px`);
       }
 
+      // Use the view transition API to smoothly change the theme
       document.startViewTransition(() => {
         setTheme(newMode);
       });

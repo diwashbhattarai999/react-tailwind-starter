@@ -3,8 +3,10 @@ import { type JSX, Suspense } from 'react';
 import { PageLoader } from '@/app/page-loader';
 
 /**
- * Wraps a component with Suspense to enable lazy loading.
- * @param Component The lazy-loaded React component.
+ * Higher-order component that wraps a component with React's Suspense.
+ * It allows for lazy loading of components with a fallback UI.
+ *
+ * @param {React.LazyExoticComponent<() => JSX.Element>} Component - The component to be wrapped.
  */
 export const withSuspense = (Component: React.LazyExoticComponent<() => JSX.Element>) => (
   <Suspense fallback={<PageLoader />}>
