@@ -39,7 +39,7 @@
 .dark {
   --background: oklch(0.14 0.01 270);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.22 0.01 278.71);
+  --card: oklch(25.438% 0.01912 276.101);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.22 0.01 278.71);
   --popover-foreground: oklch(0.985 0 0);

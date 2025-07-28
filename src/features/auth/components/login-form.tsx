@@ -21,12 +21,12 @@ import { useLogin } from '../hooks/use-login';
 import { type LoginFormData, loginSchema } from '../schema/login-schema';
 
 export const LoginForm = () => {
-  const { mutate: loginUser, isPending } = useLogin();
-
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'all',
   });
+
+  const { mutate: loginUser, isPending } = useLogin({ setError: form.setError });
 
   const errorMessage = form.formState.errors?.root?.message || '';
 

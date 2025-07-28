@@ -2,6 +2,7 @@ import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE } from 
 
 import { configureStore } from '@reduxjs/toolkit';
 
+import { counterReducer } from './slices/counter-slice';
 import { persistedReducer } from './persist-config';
 
 /**
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     // Add all reducers to persistedReducer file if it needs to be persisted
     persistedReducer,
+    counter: counterReducer,
     // Add other non-persisted reducers here
   },
 

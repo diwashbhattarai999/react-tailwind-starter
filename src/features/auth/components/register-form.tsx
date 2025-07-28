@@ -21,12 +21,12 @@ import { useRegister } from '../hooks/use-register';
 import { type RegisterFormData, registerSchema } from '../schema/register-schema';
 
 export const RegisterForm = () => {
-  const { mutate: registerUser, isPending } = useRegister();
-
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     mode: 'all',
   });
+
+  const { mutate: registerUser, isPending } = useRegister({ setError: form.setError });
 
   const errorMessage = form.formState.errors?.root?.message || '';
 

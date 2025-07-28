@@ -24,12 +24,12 @@ import {
 } from '../schema/forgot-password-schema';
 
 export const ForgotPasswordForm = () => {
-  const { mutate: forgotPassword, isPending } = useForgotPassword();
-
   const form = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordSchema),
     mode: 'all',
   });
+
+  const { mutate: forgotPassword, isPending } = useForgotPassword({ setError: form.setError });
 
   const errorMessage = form.formState.errors?.root?.message || '';
 
