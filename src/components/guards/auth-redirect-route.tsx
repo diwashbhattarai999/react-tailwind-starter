@@ -1,25 +1,20 @@
 import { Navigate, Outlet } from 'react-router';
 
 import { ROUTES } from '@/configs/routes';
-
-/**
- * Checks if the user is authenticated.
- * Replace this with your real auth logic.
- */
-const useAuth = () => {
-  // For demo: pretend we check if a token exists in localStorage
-  const token = localStorage.getItem('authToken');
-  return !!token;
-};
+import { useAuth } from '@/contexts/auth-context';
 
 /**
  * AuthRedirect: Redirects authenticated users away from auth pages
  * (e.g., login/register) back to dashboard or another protected page.
  */
 export function AuthRedirect() {
-  const isAuthenticated = useAuth();
+  const { isAuthenticated } = useAuth();
+
+  // If user is authenticated, redirect to dashboard
   if (isAuthenticated) {
     return <Navigate replace to={ROUTES.DASHBOARD.BASE} />;
   }
+
+  // If not authenticated, render child routes (auth pages)
   return <Outlet />;
 }

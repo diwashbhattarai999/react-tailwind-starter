@@ -4,8 +4,8 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import App from '@/app';
 import { NotFound } from '@/app/not-found';
 import { AuthRedirect } from '@/components/guards/auth-redirect-route';
+import { ProtectedRoute } from '@/components/guards/protected-route';
 import { withSuspense } from '@/components/shared/with-suspense';
-// import { ProtectedRoute } from '@/components/guards/protected-route';
 import { ROUTES } from '@/configs/routes';
 import { AuthLayout } from '@/features/auth';
 import { DashboardLayout } from '@/features/dashboard';
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
 
       // Protected dashboard routes
       {
-        // Component: ProtectedRoute,
+        Component: ProtectedRoute,
         children: [
           // Dashboard Routes
           {
