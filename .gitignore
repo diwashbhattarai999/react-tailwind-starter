@@ -51,3 +51,9 @@ dist-ssr/
 *.bak             # Backup files
 *.tmp             # Temporary files
 Thumbs.db         # Windows thumbnail cache
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
