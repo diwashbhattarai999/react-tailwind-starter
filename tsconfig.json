@@ -4,7 +4,8 @@
   // =============================================
   "include": [
     "src/**/*", // Include all files in the src directory
-    "vite.config.ts" // Include the Vite configuration file
+    "vite.config.ts", // Include the Vite configuration file
+    "vitest.setup.ts" // Include the Vitest setup file
   ],
 
   // =============================================
@@ -73,7 +74,9 @@
     // -------------------------------
     "types": [
       "node", // Node.js type definitions
-      "vite/client" // Vite client types
+      "vite/client", // Vite client types
+      "vitest/globals", // Vitest global types
+      "@testing-library/jest-dom" // Jest DOM types for testing
     ],
 
     // -------------------------------

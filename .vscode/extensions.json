@@ -1,3 +1,11 @@
 {
-  "recommendations": []
+  "recommendations": [
+    "formulahendry.auto-rename-tag",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright",
+    "yoavbls.pretty-ts-errors",
+    "bradlc.vscode-tailwindcss"
+  ]
 }

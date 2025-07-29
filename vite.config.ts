@@ -31,6 +31,7 @@ export default ({ mode }: { mode: string }) => {
     server: {
       port: Number(process.env.VITE_PORT) || 5173,
       // open: true,
+      strictPort: true, // Ensures the server uses the specified port and fails if it's already in use.
     },
 
     // ============================================================
@@ -41,6 +42,20 @@ export default ({ mode }: { mode: string }) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+    },
+
+    test: {
+      reporters: ['verbose'],
+      globals: true,
+      environment: 'jsdom',
+      pool: 'forks', // https://vitest.dev/config/#pool
+      coverage: {
+        provider: 'v8',
+        reportsDirectory: './coverage',
+        include: ['src/**/*.{ts,tsx}'],
+        exclude: [],
+      },
+      setupFiles: ['./vitest.setup.ts'],
     },
   });
 };
