@@ -94,39 +94,78 @@ pnpm preview
 
 ## Scripts
 
-| Script              | Description                                  |
-| ------------------- | -------------------------------------------- |
-| `pnpm dev`          | Start the development server                 |
-| `pnpm build`        | Build the project for production             |
-| `pnpm preview`      | Preview the production build                 |
-| `pnpm lint`         | Run ESLint to check code style errors        |
-| `pnpm lint:fix`     | Auto-fix ESLint errors                       |
-| `pnpm format`       | Format code using Prettier                   |
-| `pnpm format:check` | Check code formatting without fixing         |
-| `pnpm type-check`   | Run TypeScript type checking                 |
-| `pnpm upgrade`      | Upgrade dependencies using npm-check-updates |
+| Script                    | Description                                  |
+| ------------------------- | -------------------------------------------- |
+| `pnpm dev`                | Start the development server                 |
+| `pnpm build`              | Build the project for production             |
+| `pnpm preview`            | Preview the production build                 |
+| `pnpm lint`               | Run ESLint to check code style errors        |
+| `pnpm lint:fix`           | Auto-fix ESLint errors                       |
+| `pnpm format`             | Format code using Prettier                   |
+| `pnpm format:check`       | Check code formatting without fixing         |
+| `pnpm fix-all`            | Run both lint and format fixes               |
+| `pnpm type-check`         | Run TypeScript type checking                 |
+| `pnpm upgrade`            | Upgrade dependencies using npm-check-updates |
+| `pnpm prepare`            | Prepare the project (install Husky hooks)    |
+| `pnpm commit`             | Commit changes with commitizen               |
+| `pnpm test`               | Run unit tests with Vitest & Playwright      |
+| `pnpm test:unit`          | Run unit tests only with Vitest              |
+| `pnpm test:unit:coverage` | Run unit tests with coverage report          |
+| `pnpm test:e2e`           | Run end-to-end tests with Playwright         |
+| `pnpm test:e2e:report`    | Show Playwright test report                  |
+| `pnpm docker:build`       | Build Docker image for production            |
+| `pnpm docker:run`         | Run Docker container for production          |
 
 ---
 
 ## Folder Structure
 
 ```
+
+├── .github/               # GitHub Actions CI/CD workflows
+├── .husky/                # Husky Git hooks
+├── .vscode/               # VSCode settings and extensions recommendations
 ├── public/                # Static assets (favicons, manifest, images)
 ├── src/
+│   ├── app/               # Application logic, provider wrappers and router setup
+│   ├── assets/            # Static assets (images, fonts, etc.)
 │   ├── components/        # Reusable React components
-│   ├── pages/             # Page components and routes
-│   ├── styles/            # Global and Tailwind CSS configs
+│   ├── configs/           # Configuration files (env, routes, site etc.)
+│   ├── constants/         # Constants used throughout the app
+│   ├── features/          # Feature-specific components and logic
 │   ├── hooks/             # Custom React hooks
+│   ├── i18n/              # Internationalization files
+│   ├── lib/               # Shared libraries and utilities
+│   ├── services/          # API services and data fetching logic
+│   ├── store/             # Redux store setup and slices
+│   ├── styles/            # Global and Tailwind CSS configs
+│   ├── types/             # TypeScript type definitions
 │   ├── utils/             # Utility functions
-│   ├── App.tsx            # Root React component
 │   ├── main.tsx           # Entry point
-│   └── ...
-├── .eslintrc.js           # ESLint config
+│   └── vite-env.d.ts      # Vite environment types
+├── tests/                 # Test files
+├── .dockerignore          # Docker ignore file
+├── .env.development       # Development environment variables
+├── .env.example           # Example environment variables
+├── .env.production        # Production environment variables
+├── .gitignore             # Git ignore file
+├── .prettierignore        # Prettier ignore file
 ├── .prettierrc            # Prettier config
-├── tailwind.config.js     # Tailwind config
+├── commitlint.config.ts   # Commitlint configuration
+├── components.json        # shadcn/ui components configuration
+├── CONTRIBUTING.md        # Contribution guidelines
+├── Dockerfile             # Dockerfile for production
+├── eslint.config.js       # ESLint configuration
+├── index.html             # Main HTML file
+├── LICENSE                # Project license
+├── nginx.conf             # Nginx configuration for production
+├── package.json           # Project dependencies and scripts
+├── playwright.config.ts   # Playwright configuration
+├── pnpm-lock.yaml         # pnpm lock file
+├── README.md              # Project documentation
 ├── tsconfig.json          # TypeScript config
 ├── vite.config.ts         # Vite config
-└── package.json
+└── vitest.setup.ts        # Vitest setup file
 ```
 
 ---
