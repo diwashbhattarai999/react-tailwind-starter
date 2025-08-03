@@ -1,8 +1,5 @@
 import { RuleConfigSeverity, UserConfig } from '@commitlint/types';
 
-// Define commonly used constants
-const SCOPE_ENUM = ['client', 'common', 'config', 'scripts', 'deps', 'ci', 'docs', 'test'];
-
 const TYPE_ENUM = [
   'feat', // A new feature
   'fix', // A bug fix
@@ -19,9 +16,6 @@ const TYPE_ENUM = [
 const commitLintConfig: UserConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
-    // Enforce scope usage and validation
-    'scope-enum': [RuleConfigSeverity.Error, 'always', SCOPE_ENUM],
-
     // Enforce type usage and validation
     'type-enum': [RuleConfigSeverity.Error, 'always', TYPE_ENUM],
 
