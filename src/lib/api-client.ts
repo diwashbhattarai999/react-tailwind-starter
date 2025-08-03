@@ -105,6 +105,6 @@ const createApiInstance = ({
 
 // Create Axios instances for each API
 export const apiClient = createApiInstance({
-  baseUrl: ENV.API_URL,
-  apiKey: ENV.API_KEY,
+  baseUrl: ENV.VITE_API_URL,
+  apiKey: ENV.VITE_API_KEY,
 });

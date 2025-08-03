@@ -15,6 +15,11 @@ interface ImportMetaEnv {
   readonly VITE_PORT: number;
 
   /**
+   * The base URL for the application, used for routing and API calls.
+   */
+  readonly VITE_BASE_URL: string;
+
+  /**
    * Base URL for API.
    */
   readonly VITE_API_URL: string;
