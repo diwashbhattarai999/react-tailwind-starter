@@ -22,8 +22,10 @@ jobs:
         node-version: lts/*
         cache: 'pnpm'
 
-    - name: 💾 Install pnpm
-      run: npm install -g pnpm
+    - name: 💾 Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 9
 
     - name: 📥 Install dependencies
       run: pnpm install
