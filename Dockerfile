@@ -1,32 +1,27 @@
-# Use Node.js 18
-FROM node:18-alpine
+# Stage 1: Build React app
+FROM node:20-alpine AS builder
 
-# Install git and openssh (required for git+ssh URLs)
-RUN apk add --no-cache git openssh
-
-# Setting the working directory
 WORKDIR /app
 
-# Copy required files to the working directory
-COPY package*.json ./
+RUN corepack enable && corepack prepare pnpm@10.11.1 --activate
 
-# Install dependencies using npm
-RUN npm install 
-
-# Copy the rest of the application code to the working directory
 COPY . .
 
-# Set environment variable
-ENV NODE_ENV=production
+RUN pnpm install
+RUN pnpm build
 
-# Build the application
-RUN npm run build
+# Stage 2: Serve with nginx
+FROM nginx:1.25-alpine
 
-# Serve the static files using a simple HTTP server
-RUN npm install -g serve
+RUN apk add --no-cache brotli
 
-# Expose port 8080
-EXPOSE 8080
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Start the server
-CMD ["serve", "-s", "dist", "-l", "8080"]
+RUN find /usr/share/nginx/html -type f \( -name '*.js' -o -name '*.css' -o -name '*.svg' \) \
+  -exec brotli -f -q 11 {} \;
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

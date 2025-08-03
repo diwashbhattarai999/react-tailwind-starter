@@ -39,7 +39,9 @@
     "test:unit": "vitest src/",
     "test:unit:coverage": "vitest --coverage src/",
     "test:e2e": "npx playwright test",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "docker:build": "docker build -t foundation-react .",
+    "docker:run": "docker run -p 3000:80 foundation-react"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
