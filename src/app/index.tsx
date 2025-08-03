@@ -8,6 +8,7 @@ import { LanguageProvider } from '@/contexts/language-context';
 import { ThemeProvider } from '@/contexts/theme-context';
 
 import { NetworkStatus } from './network-status';
+import { ScrollToTop } from './scroll-to-top';
 
 /**
  * Main App Component
@@ -17,6 +18,7 @@ import { NetworkStatus } from './network-status';
  * - `Outlet` is used to render the child routes defined in the router configuration.
  * - `NetworkStatus` component is included to monitor and display network connectivity status.
  * - `Toaster` is used to display notifications and messages throughout the application.
+ * - `ScrollToTop` component automatically scrolls to the top of the page on route changes.
  */
 export default function App() {
   return (
@@ -33,6 +35,9 @@ export default function App() {
 
               {/* Toaster for notifications */}
               <Toaster />
+
+              {/* Scroll to top on route change */}
+              <ScrollToTop />
             </LanguageProvider>
           </ThemeProvider>
         </TanstackProvider>
