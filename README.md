@@ -4,17 +4,56 @@ A modern, lightweight React starter template built with Vite, TypeScript, Tailwi
 
 ---
 
+Here’s your updated **Features** section including current and planned features:
+
+---
+
 ## Features
 
-- ⚡️ **Blazing-fast dev server** with Vite
-- 💪 **TypeScript** support with strict type checking
-- 🎨 **Tailwind CSS** for utility-first styling
-- 🔍 **ESLint** + **Prettier** for consistent code style
-- 📦 Dependency management with **pnpm**
-- ✅ Pre-commit hooks with **Husky** and **lint-staged**
-- 📚 Opinionated folder structure and example components
-- 🛠️ Ready-to-use React Router integration
-- 🎯 Focus on developer experience and performance
+- ⚡️ **Blazing-fast development** with [Vite](https://vitejs.dev/)
+- 💪 **TypeScript** with strict mode for safer, scalable code
+- 🎨 **Tailwind CSS** for utility-first, responsive styling
+- 🧹 **ESLint** + **Prettier** for clean, consistent code formatting
+- 📦 Fast and disk-efficient dependency management via **pnpm**
+- ✅ **Husky** + **lint-staged** for Git pre-commit quality checks
+- 📁 Opinionated and scalable folder structure
+- 🛣️ **React Router DOM** for client-side routing
+- 🐳 Dockerized production setup using **multi-stage build**
+- 🗜️ Optional **Brotli** and **Gzip** compression support via Nginx
+- 🌈 Optimized for **developer experience** and **performance**
+- 🔁 **CI/CD pipeline** with GitHub Actions
+- 🌍 **Internationalization (i18n)** support with `react-i18next`
+- 🧪 **Vitest + Playwright** for unit/integration tests
+- 🧱 UI component system with **shadcn/ui**
+- 🧠 State management using **Redux Toolkit** and **Redux Persist**
+- 🔁 **Tanstack Query** (React Query) for data fetching and caching
+- 📲 **PWA Support** using manifest and service worker
+- 🔀 **Code splitting** and **lazy loading** for improved performance
+- 🌘 **Theme switching** capabilities for dark/light mode
+- 🧩 **Blocks** for reusable UI pages, components and hooks.
+
+### Blocks
+
+##### Pages
+
+- **Login** page
+- **Register** page
+- **Forgot Password** page
+
+#### Hooks
+
+- **use-local-storage** hook
+- **use-mobile** hook
+
+---
+
+## 🛠️ Upcoming Features
+
+- 📈 Analytics integration (e.g., Google Analytics, Plausible)
+- 📚 Storybook for component-driven development
+- 🚨 Performance monitoring (e.g., Sentry, LogRocket)
+- 🗺️ sitemap.xml and 🤖 robots.txt generation
+- 🧳 Monorepo support (e.g., Turborepo or Nx) – maybe (not sure yet)
 
 ---
 
