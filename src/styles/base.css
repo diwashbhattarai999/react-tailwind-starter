@@ -1,72 +1,59 @@
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+    * {
+        @apply border-border outline-ring/50;
+    }
 
-  body {
-    @apply bg-background text-foreground font-poppins;
-  }
+    body {
+        @apply bg-background text-foreground font-poppins;
+    }
 }
 
 @layer utilities {
-  /* Disable color transitions on page load */
-  .disable-transitions *,
-  .disable-transitions *::before,
-  .disable-transitions *::after {
-    transition-property: color, fill, stroke !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-  }
-}
-
-/* Radix UI utilities */
-@layer utilities {
-  .dropdown-w-full {
-    width: var(--radix-dropdown-menu-trigger-width);
-    max-height: var(--radix-dropdown-menu-content-available-height);
-  }
-
-  .popover-w-full {
-    width: var(--radix-popover-trigger-width);
-    max-height: var(--radix-popper-content-available-height);
-  }
+    /* Disable color transitions on page load */
+    .disable-transitions *,
+    .disable-transitions *::before,
+    .disable-transitions *::after {
+        transition-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-property: color, fill, stroke !important;
+    }
 }
 
 @utility no-scrollbar {
-  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
 /* View Transition Wave Effect */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+    mix-blend-mode: normal;
+    animation: none;
 }
 
 ::view-transition-old(root) {
-  /* Ensure the outgoing view (old theme) is beneath */
-  z-index: 0;
+    /* Ensure the outgoing view (old theme) is beneath */
+    z-index: 0;
 }
 
 ::view-transition-new(root) {
-  /* Ensure the incoming view (new theme) is always on top */
-  z-index: 1;
+    /* Ensure the incoming view (new theme) is always on top */
+    z-index: 1;
 }
 
 @keyframes reveal {
-  from {
-    /* Use CSS variables for the origin, defaulting to center if not set */
-    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
-    opacity: 0.7;
-  }
-  to {
-    /* Use CSS variables for the origin, defaulting to center if not set */
-    clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
-    opacity: 1;
-  }
+    from {
+        /* Use CSS variables for the origin, defaulting to center if not set */
+        clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+        opacity: 0.7;
+    }
+    to {
+        /* Use CSS variables for the origin, defaulting to center if not set */
+        clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+        opacity: 1;
+    }
 }
 
 ::view-transition-new(root) {
-  /* Apply the reveal animation */
-  animation: reveal 0.4s ease-in-out forwards;
+    /* Apply the reveal animation */
+    animation: reveal 0.4s ease-in-out forwards;
 }

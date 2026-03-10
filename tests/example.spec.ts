@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from "@playwright/test";
 
-test.describe('Landing Page', () => {
-  test('should have the correct title', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+test.describe("Landing Page", () => {
+    test("should have the correct title", async ({ page }) => {
+        await page.goto("http://localhost:5173");
 
-    await expect(page).toHaveTitle('Foundation React');
-  });
+        await expect(page).toHaveTitle("Foundation React");
+    });
 });

@@ -1,0 +1,32 @@
+pre-commit:
+  commands:
+    lint-fix:
+      run: pnpm lint:fix
+      stage_fixed: true
+
+pre-push:
+  commands:
+    branch-name:
+      run: |
+        BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
+        if ! echo "$BRANCH_NAME" | grep -Eq '^(main|dev|feature/.+|bugfix/.+|hotfix/.+)$'; then
+          echo "❌ Invalid branch name: '$BRANCH_NAME'"
+          echo "Branches must be one of:"
+          echo "  main"
+          echo "  dev"
+          echo "  feature/<name>"
+          echo "  bugfix/<name>"
+          echo "  hotfix/<name>"
+          exit 1
+        fi
+    lint-check:
+      glob: "*.{js,ts,tsx,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      exclude:
+        - "coverage/**"
+        - "dist/**"
+      run: pnpm lint:check
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm dlx commitlint --edit {1}

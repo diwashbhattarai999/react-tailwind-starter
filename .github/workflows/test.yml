@@ -1,10 +1,12 @@
 name: CI - Unit & E2E Tests
 
 on:
-  push:
-    branches: [ main, development, staging, test, feature/*, fix/* ]
   pull_request:
-    branches: [ main, development, staging, test, feature/*, fix/* ]
+  push:
+    branches:
+    - main
+    - dev
+    - feature/**
 
 jobs:
   test:

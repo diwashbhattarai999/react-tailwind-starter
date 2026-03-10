@@ -1,11 +1,11 @@
-import { CircleCheck, CircleX } from 'lucide-react';
+import { CircleCheck, CircleX } from "lucide-react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 // Interface for the FormErrorMessage component props
 interface FormErrorProps {
-  error?: string | null;
-  className?: string;
+    className?: string;
+    error?: string | null;
 }
 
 /**
@@ -15,26 +15,26 @@ interface FormErrorProps {
  * It is designed to be used in forms to provide feedback to users when an error occurs.
  */
 const FormErrorMessage = ({ error, className }: FormErrorProps) => {
-  if (!error) return null;
+    if (!error) return null;
 
-  const message = error || 'Something went wrong. Please try again later.';
+    const message = error || "Something went wrong. Please try again later.";
 
-  return (
-    <div
-      className={cn(
-        'text-destructive bg-destructive/10 border-destructive/5 flex items-center gap-2 rounded-lg border p-4 text-sm font-medium',
-        className
-      )}
-    >
-      <CircleX size={16} />
-      <span>{message}</span>
-    </div>
-  );
+    return (
+        <div
+            className={cn(
+                "flex items-center gap-2 rounded-lg border border-destructive/5 bg-destructive/10 p-4 font-medium text-destructive text-sm",
+                className
+            )}
+        >
+            <CircleX size={16} />
+            <span>{message}</span>
+        </div>
+    );
 };
 
 // Interface for the FormSuccessMessage component props
 interface FormSuccessProps {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
@@ -44,10 +44,10 @@ interface FormSuccessProps {
  * It is designed to be used in forms to provide feedback to users when an action is successful.
  */
 const FormSuccessMessage = ({ children }: FormSuccessProps) => (
-  <div className='text-success-foreground bg-success flex items-center gap-2 rounded-md p-4 text-sm font-medium'>
-    <CircleCheck size={16} />
-    <span>{children}</span>
-  </div>
+    <div className="flex items-center gap-2 rounded-md bg-success p-4 font-medium text-sm text-success-foreground">
+        <CircleCheck size={16} />
+        <span>{children}</span>
+    </div>
 );
 
 export { FormErrorMessage, FormSuccessMessage };

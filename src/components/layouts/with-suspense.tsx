@@ -1,6 +1,6 @@
-import { type JSX, Suspense } from 'react';
+import { type JSX, Suspense } from "react";
 
-import { PageLoader } from '@/app/page-loader';
+import { PageLoader } from "@/app/page-loader";
 
 /**
  * Higher-order component that wraps a component with React's Suspense.
@@ -8,8 +8,10 @@ import { PageLoader } from '@/app/page-loader';
  *
  * @param {React.LazyExoticComponent<() => JSX.Element>} Component - The component to be wrapped.
  */
-export const withSuspense = (Component: React.LazyExoticComponent<() => JSX.Element>) => (
-  <Suspense fallback={<PageLoader />}>
-    <Component />
-  </Suspense>
+export const withSuspense = (
+    Component: React.LazyExoticComponent<() => JSX.Element>
+) => (
+    <Suspense fallback={<PageLoader />}>
+        <Component />
+    </Suspense>
 );

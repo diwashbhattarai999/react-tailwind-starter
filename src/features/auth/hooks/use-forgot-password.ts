@@ -1,34 +1,39 @@
-import type { UseFormSetError } from 'react-hook-form';
-import { useNavigate } from 'react-router';
+import { useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import type { UseFormSetError } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
-import type { AxiosError } from 'axios';
-import { toast } from 'sonner';
+import { ROUTES } from "@/configs/routes";
+import { forgotPassword } from "@/services/auth.service";
+import type { ErrorResponse } from "@/types/response.types";
+import type { ForgotPasswordResponse } from "@/types/services/auth.types";
 
-import { ROUTES } from '@/configs/routes';
-import { forgotPassword } from '@/services/auth.service';
-import type { ErrorResponse } from '@/types/response.types';
-import type { ForgotPasswordResponse } from '@/types/services/auth.types';
-import { useMutation } from '@tanstack/react-query';
-
-import type { ForgotPasswordFormData } from '../schema/forgot-password-schema';
+import type { ForgotPasswordFormData } from "../schema/forgot-password-schema";
 
 export const useForgotPassword = ({
-  setError,
+    setError,
 }: {
-  setError: UseFormSetError<ForgotPasswordFormData>;
+    setError: UseFormSetError<ForgotPasswordFormData>;
 }) => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  return useMutation<ForgotPasswordResponse, AxiosError<ErrorResponse>, ForgotPasswordFormData>({
-    mutationFn: forgotPassword,
-    onSuccess: () => {
-      void navigate(ROUTES.AUTH.LOGIN, { replace: true });
-    },
-    onError: error => {
-      setError('root', {
-        message: error.message || 'Something went wrong. Please try again later.',
-      });
-      toast.error(`Forgot password error: ${error.message}`);
-    },
-  });
+    return useMutation<
+        ForgotPasswordResponse,
+        AxiosError<ErrorResponse>,
+        ForgotPasswordFormData
+    >({
+        mutationFn: forgotPassword,
+        onSuccess: () => {
+            navigate(ROUTES.AUTH.LOGIN, { replace: true });
+        },
+        onError: (error) => {
+            setError("root", {
+                message:
+                    error.message ||
+                    "Something went wrong. Please try again later.",
+            });
+            toast.error(`Forgot password error: ${error.message}`);
+        },
+    });
 };

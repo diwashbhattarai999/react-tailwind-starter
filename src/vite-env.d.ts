@@ -9,25 +9,24 @@
  * These variables are injected at build time by Vite.
  */
 interface ImportMetaEnv {
-  /**
-   * The port number on which the application runs during development.
-   */
-  readonly VITE_PORT: number;
+    /**
+     * API key for authenticating requests to the API.
+     */
+    readonly VITE_API_KEY: string;
 
-  /**
-   * The base URL for the application, used for routing and API calls.
-   */
-  readonly VITE_BASE_URL: string;
+    /**
+     * Base URL for API.
+     */
+    readonly VITE_API_URL: string;
 
-  /**
-   * Base URL for API.
-   */
-  readonly VITE_API_URL: string;
-
-  /**
-   * API key for authenticating requests to the API.
-   */
-  readonly VITE_API_KEY: string;
+    /**
+     * The base URL for the application, used for routing and API calls.
+     */
+    readonly VITE_BASE_URL: string;
+    /**
+     * The port number on which the application runs during development.
+     */
+    readonly VITE_PORT: number;
 }
 
 /**
@@ -35,5 +34,5 @@ interface ImportMetaEnv {
  * Provides access to the environment variables through `import.meta.env`.
  */
 interface ImportMeta {
-  readonly env: ImportMetaEnv;
+    readonly env: ImportMetaEnv;
 }

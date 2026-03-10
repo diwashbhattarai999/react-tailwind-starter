@@ -11,7 +11,7 @@ Thank you for your interest in contributing to the **Foundation React Template**
 To start developing with this template, run the following commands **in order**:
 
 ```bash
-pnpm prepare     # One-time setup to install Git hooks via Husky
+pnpm prepare     # One-time setup to install Git hooks via Lefthook
 pnpm install     # Install project dependencies
 pnpm dev         # Start the development server
 ```
@@ -21,8 +21,7 @@ pnpm dev         # Start the development server
 - **Node.js**: Use the latest LTS version.
 - **Editor**: We recommend [VS Code](https://code.visualstudio.com/) with the following extensions:
 
-  - ESLint
-  - Prettier
+  - Biome
   - Tailwind CSS IntelliSense
   - GitLens (optional but helpful for Git insights)
 
@@ -130,7 +129,7 @@ Use descriptive, kebab-case branch names:
 ```bash
 feature/signup-form
 fix/image-loader-bug
-chore/update-eslint-rules
+chore/update-biome-rules
 ```
 
 ---

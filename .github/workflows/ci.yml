@@ -1,66 +1,107 @@
 name: CI
 
 on:
-  push:
-    branches: [ main, development, staging, test, feature/*, fix/* ]
   pull_request:
-    branches: [ main, development, staging, test, feature/*, fix/* ]
-
-permissions:
-  contents: read
-  pull-requests: read
+  push:
+    branches:
+    - main
+    - dev
+    - feature/**
 
 jobs:
-  quality-checks:
-    name: Quality Checks
+  build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
-    # Checkout repo
-    - name: ⬇️ Checkout repo
+    - name: Checkout code
       uses: actions/checkout@v4
 
-    # Setup Node.js
-    - name: ⎔ Setup Node.js
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 22
+        cache: "pnpm"
 
-    # Setup pnpm
-    - name: 🚀 Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
 
-    # Cache pnpm store
-    - name: 📦 Cache pnpm store
-      uses: actions/cache@v4
-      with:
-        path: ~/.pnpm-store
-        key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-        restore-keys: |
-          pnpm-store-
+    - name: Inject environment variables
+      run: |
+        echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> .env.production
+        echo "VITE_PUBLIC_URL=${{ secrets.VITE_PUBLIC_URL }}" >> .env.production
+        echo "VITE_HOST=${{ secrets.VITE_HOST }}" >> .env.production
+        echo "VITE_DEV_PORT=${{ secrets.VITE_DEV_PORT }}" >> .env.production
+        echo "VITE_PREVIEW_PORT=${{ secrets.VITE_PREVIEW_PORT }}" >> .env.production
+        echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" >> .env.production
+        echo "VITE_API_TIMEOUT=${{ secrets.VITE_API_TIMEOUT }}" >> .env.production
 
-    # Install dependencies
-    - name: 📥 Install dependencies
-      run: pnpm install
-
-    # Build project
-    - name: 🏗️ Build Project
+    - name: Build project
       run: pnpm build
 
-    # Run Typescript type checking
-    - name: 🔎 Run Typescript type checking
-      run: pnpm type-check
+  biome-ci:
+    runs-on: ubuntu-latest
 
-    # Run ESLint
-    - name: 🧑‍💻 Run ESLint
-      run: pnpm lint
+    permissions:
+      contents: read
 
-    # Run Prettier Check
-    - name: 📝 Run Prettier Check
-      run: pnpm format:check
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    # Commitlint
-    - name: ⚙️ Commitlint
-      uses: wagoid/commitlint-github-action@v6
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+        cache: "pnpm"
+
+    - name: Install dependencies based on lockfile
+      run: pnpm install --frozen-lockfile
+
+    - name: Setup Biome
+      uses: biomejs/setup-biome@v2
+
+    - name: Run Biome
+      run: biome ci
+
+  commitlint:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+        cache: "pnpm"
+
+    - name: Install dependencies based on lockfile
+      run: pnpm install --frozen-lockfile
+
+    - name: Validate current commit (push)
+      if: github.event_name == 'push'
+      run: npx commitlint --last --verbose
+
+    - name: Validate PR commits (pull_request)
+      if: github.event_name == 'pull_request'
+      run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose

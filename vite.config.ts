@@ -3,59 +3,60 @@
 // This file configures the Vite development and build setup
 // ============================================================
 
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import { defineConfig, loadEnv } from 'vite';
-import path from 'path';
+import path from "node:path";
+
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig, loadEnv } from "vite";
 
 export default ({ mode }: { mode: string }) => {
-  // ============================================================
-  // Load environment variables based on the current mode
-  // This merges the existing process.env with the environment variables
-  // from the .env file corresponding to the specified mode
-  // ============================================================
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+    // ============================================================
+    // Load environment variables based on the current mode
+    // This merges the existing process.env with the environment variables
+    // from the .env file corresponding to the specified mode
+    // ============================================================
+    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
-  return defineConfig({
-    // ============================================================
-    // Plugins
-    // Adding support for React and TailwindCSS
-    // ============================================================
-    plugins: [react(), tailwindcss()],
+    return defineConfig({
+        // ============================================================
+        // Plugins
+        // Adding support for React and TailwindCSS
+        // ============================================================
+        plugins: [react(), tailwindcss()],
 
-    // ============================================================
-    // Development Server Configuration
-    // - port: The port on which the dev server runs
-    // - open: Automatically opens the browser when the server starts
-    // ============================================================
-    server: {
-      port: Number(process.env.VITE_PORT) || 5173,
-      // open: true,
-      strictPort: true, // Ensures the server uses the specified port and fails if it's already in use.
-    },
+        // ============================================================
+        // Development Server Configuration
+        // - port: The port on which the dev server runs
+        // - open: Automatically opens the browser when the server starts
+        // ============================================================
+        server: {
+            port: Number(process.env.VITE_PORT) || 5173,
+            // open: true,
+            strictPort: true, // Ensures the server uses the specified port and fails if it's already in use.
+        },
 
-    // ============================================================
-    // Module Resolution Configuration
-    // - alias: Defines path aliases to simplify imports (e.g. When importing '@/components', it will resolve to 'src/components')
-    // ============================================================
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
-    },
+        // ============================================================
+        // Module Resolution Configuration
+        // - alias: Defines path aliases to simplify imports (e.g. When importing '@/components', it will resolve to 'src/components')
+        // ============================================================
+        resolve: {
+            alias: {
+                "@": path.resolve(import.meta.dirname, "./src"),
+            },
+        },
 
-    test: {
-      reporters: ['verbose'],
-      globals: true,
-      environment: 'jsdom',
-      pool: 'forks', // https://vitest.dev/config/#pool
-      coverage: {
-        provider: 'v8',
-        reportsDirectory: './coverage',
-        include: ['src/**/*.{ts,tsx}'],
-        exclude: [],
-      },
-      setupFiles: ['./vitest.setup.ts'],
-    },
-  });
+        test: {
+            reporters: ["verbose"],
+            globals: true,
+            environment: "jsdom",
+            pool: "forks", // https://vitest.dev/config/#pool
+            coverage: {
+                provider: "v8",
+                reportsDirectory: "./coverage",
+                include: ["src/**/*.{ts,tsx}"],
+                exclude: [],
+            },
+            setupFiles: ["./vitest.setup.ts"],
+        },
+    });
 };

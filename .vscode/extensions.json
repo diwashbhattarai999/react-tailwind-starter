@@ -2,8 +2,7 @@
   "recommendations": [
     "formulahendry.auto-rename-tag",
     "dsznajder.es7-react-js-snippets",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "biomejs.vscode-biomerc",
     "ms-playwright.playwright",
     "yoavbls.pretty-ts-errors",
     "bradlc.vscode-tailwindcss"
