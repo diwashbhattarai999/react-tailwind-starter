@@ -25,7 +25,7 @@ Here’s your updated **Features** section including current and planned feature
 - 🌍 **Internationalization (i18n)** support with `react-i18next`
 - 🧪 **Vitest + Playwright** for unit/integration tests
 - 🧱 UI component system with **shadcn/ui**
-- 🧠 State management using **Redux Toolkit** and **Redux Persist**
+- 🧠 State management using **Zustand**
 - 🔁 **Tanstack Query** (React Query) for data fetching and caching
 - 📲 **PWA Support** using manifest and service worker
 - 🔀 **Code splitting** and **lazy loading** for improved performance
@@ -133,7 +133,7 @@ pnpm preview
 │   ├── i18n/              # Internationalization files
 │   ├── lib/               # Shared libraries and utilities
 │   ├── services/          # API services and data fetching logic
-│   ├── store/             # Redux store setup and slices
+│   ├── store/             # Zustand stores
 │   ├── styles/            # Global and Tailwind CSS configs
 │   ├── types/             # TypeScript type definitions
 │   ├── utils/             # Utility functions

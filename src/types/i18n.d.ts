@@ -1,5 +1,4 @@
 import type { defaultNS } from "../i18n";
-
 import type resources from "./resources";
 
 declare module "i18next" {

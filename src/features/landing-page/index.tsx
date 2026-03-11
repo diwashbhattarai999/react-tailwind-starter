@@ -6,18 +6,17 @@ import { Logo } from "@/components/shared/logo";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-    decrement,
-    increment,
-    incrementByAmount,
-} from "@/store/slices/counter-slice";
+import { useCounterStore } from "@/store/counter-store";
 
 export default function LandingPage() {
     const { t } = useTranslation("translation");
 
-    const count = useAppSelector((state) => state.counter.value);
-    const dispatch = useAppDispatch();
+    const count = useCounterStore((state) => state.value);
+    const decrement = useCounterStore((state) => state.decrement);
+    const increment = useCounterStore((state) => state.increment);
+    const incrementByAmount = useCounterStore(
+        (state) => state.incrementByAmount
+    );
 
     return (
         <main className="relative flex min-h-screen items-center justify-center px-4">
@@ -46,19 +45,19 @@ export default function LandingPage() {
                         <div className="flex items-center justify-center gap-x-4">
                             <Button
                                 className="h-12 w-24 text-xl"
-                                onClick={() => dispatch(decrement())}
+                                onClick={decrement}
                             >
                                 -
                             </Button>
                             <Button
                                 className="h-12 w-24 text-xl"
-                                onClick={() => dispatch(increment())}
+                                onClick={increment}
                             >
                                 +
                             </Button>
                             <Button
                                 className="h-12 w-24"
-                                onClick={() => dispatch(incrementByAmount(5))}
+                                onClick={() => incrementByAmount(5)}
                             >
                                 Add 5
                             </Button>

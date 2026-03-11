@@ -1,6 +1,5 @@
 import { Outlet } from "react-router";
 
-import { ReduxProvider } from "@/components/providers/redux-provider";
 import { TanstackProvider } from "@/components/providers/tanstack-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,7 +13,7 @@ import { ScrollToTop } from "./scroll-to-top";
 /**
  * Main App Component
  * Wraps the application with necessary providers for state management, authentication, theming and internationalization.
- * It includes the ReduxProvider, AuthProvider, TanstackProvider, ThemeProvider, and LanguageProvider.
+ * It includes the AuthProvider, TanstackProvider, ThemeProvider, and LanguageProvider.
  *
  * - `Outlet` is used to render the child routes defined in the router configuration.
  * - `NetworkStatus` component is included to monitor and display network connectivity status.
@@ -24,27 +23,25 @@ import { ScrollToTop } from "./scroll-to-top";
 export default function App() {
     return (
         <TooltipProvider>
-            <ReduxProvider>
-                <AuthProvider>
-                    <TanstackProvider>
-                        <ThemeProvider>
-                            <LanguageProvider>
-                                {/* Render child routes */}
-                                <Outlet />
+            <AuthProvider>
+                <TanstackProvider>
+                    <ThemeProvider>
+                        <LanguageProvider>
+                            {/* Render child routes */}
+                            <Outlet />
 
-                                {/* Network Status - Online/Offline Indicator */}
-                                <NetworkStatus />
+                            {/* Network Status - Online/Offline Indicator */}
+                            <NetworkStatus />
 
-                                {/* Toaster for notifications */}
-                                <Toaster />
+                            {/* Toaster for notifications */}
+                            <Toaster />
 
-                                {/* Scroll to top on route change */}
-                                <ScrollToTop />
-                            </LanguageProvider>
-                        </ThemeProvider>
-                    </TanstackProvider>
-                </AuthProvider>
-            </ReduxProvider>
+                            {/* Scroll to top on route change */}
+                            <ScrollToTop />
+                        </LanguageProvider>
+                    </ThemeProvider>
+                </TanstackProvider>
+            </AuthProvider>
         </TooltipProvider>
     );
 }

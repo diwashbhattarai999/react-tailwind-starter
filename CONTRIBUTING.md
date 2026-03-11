@@ -69,7 +69,7 @@ src/
 ├─ i18n/          # Internationalization setup
 ├─ lib/           # Utilities or third-party wrappers
 ├─ services/      # API service layer
-├─ store/         # Global state management (e.g., Redux/Zustand)
+├─ store/         # Zustand stores and state logic
 ├─ styles/        # Global and Tailwind CSS styles
 ├─ types/         # Global TypeScript types
 ├─ utils/         # Helper and utility functions
