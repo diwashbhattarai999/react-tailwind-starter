@@ -14,7 +14,6 @@ export function SiteHeader() {
                 <h1 className="font-medium text-base">Documents</h1>
                 <div className="ml-auto flex items-center gap-2">
                     <Button
-                        asChild
                         className="hidden sm:flex"
                         size="sm"
                         variant="ghost"

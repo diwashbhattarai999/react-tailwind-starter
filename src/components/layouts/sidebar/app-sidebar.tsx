@@ -155,14 +155,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5">
-                            <Link to="#">
+                        <Link to="#">
+                            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5">
                                 <IconInnerShadowTop className="!size-5" />
                                 <span className="font-semibold text-base">
                                     Acme Inc.
                                 </span>
-                            </Link>
-                        </SidebarMenuButton>
+                            </SidebarMenuButton>
+                        </Link>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>

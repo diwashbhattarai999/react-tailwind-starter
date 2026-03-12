@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import type { UseFormSetError } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
@@ -11,11 +10,7 @@ import type { ForgotPasswordResponse } from "@/types/services/auth.types";
 
 import type { ForgotPasswordFormData } from "../schema/forgot-password-schema";
 
-export const useForgotPassword = ({
-    setError,
-}: {
-    setError: UseFormSetError<ForgotPasswordFormData>;
-}) => {
+export const useForgotPassword = () => {
     const navigate = useNavigate();
 
     return useMutation<
@@ -28,11 +23,6 @@ export const useForgotPassword = ({
             navigate(ROUTES.AUTH.LOGIN, { replace: true });
         },
         onError: (error) => {
-            setError("root", {
-                message:
-                    error.message ||
-                    "Something went wrong. Please try again later.",
-            });
             toast.error(`Forgot password error: ${error.message}`);
         },
     });

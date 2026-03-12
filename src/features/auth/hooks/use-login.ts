@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import type { UseFormSetError } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
@@ -12,11 +11,7 @@ import type { LoginResponse } from "@/types/services/auth.types";
 
 import type { LoginFormData } from "../schema/login-schema";
 
-export const useLogin = ({
-    setError,
-}: {
-    setError: UseFormSetError<LoginFormData>;
-}) => {
+export const useLogin = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
@@ -32,11 +27,6 @@ export const useLogin = ({
                 }
             },
             onError: (error) => {
-                setError("root", {
-                    message:
-                        error.response?.data.message ||
-                        "Something went wrong. Please try again later.",
-                });
                 toast.error(`Login error: ${error.message}`);
             },
         }

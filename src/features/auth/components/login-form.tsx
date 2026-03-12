@@ -5,14 +5,7 @@ import { Link } from "react-router";
 
 import { FormErrorMessage } from "@/components/shared/form-message";
 import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { ROUTES } from "@/configs/routes";
 
@@ -25,101 +18,88 @@ export const LoginForm = () => {
         mode: "all",
     });
 
-    const { mutate: loginUser, isPending } = useLogin({
-        setError: form.setError,
-    });
-
-    const errorMessage = form.formState.errors?.root?.message || "";
+    const { mutate: loginUser, isPending } = useLogin();
 
     const onSubmit = (data: LoginFormData) => {
-        loginUser(data);
+        loginUser(data, {
+            onError: (error) => {
+                form.setError("root", {
+                    message:
+                        error.response?.data.message ||
+                        "Something went wrong. Please try again later.",
+                });
+            },
+        });
     };
 
     return (
-        <Form {...form}>
-            <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-                {/* Email Address */}
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className="mb-1">
-                                Email Address
-                            </FormLabel>
-                            <FormControl>
-                                <Input
-                                    className="h-14 rounded-full bg-background/20 px-4"
-                                    error={form.formState.errors.email?.message}
-                                    placeholder="e.g. johndoe2025@gmail.com"
-                                    type="email"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+        <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
+            {/* Email Address */}
+            <Field>
+                <FieldLabel className="mb-1" htmlFor="email">
+                    Email Address
+                </FieldLabel>
+                <Input
+                    aria-invalid={Boolean(form.formState.errors.email)}
+                    className="h-14 rounded-full bg-background/20 px-4"
+                    id="email"
+                    placeholder="e.g. johndoe2025@gmail.com"
+                    type="email"
+                    {...form.register("email")}
                 />
+                <FieldError errors={[form.formState.errors.email]} />
+            </Field>
 
-                {/* Password */}
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className="mb-1">Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    error={
-                                        form.formState.errors.password?.message
-                                    }
-                                    placeholder="**********"
-                                    type="password"
-                                    {...field}
-                                    className="h-14 rounded-full bg-background/20 px-4"
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+            {/* Password */}
+            <Field>
+                <FieldLabel className="mb-1" htmlFor="password">
+                    Password
+                </FieldLabel>
+                <Input
+                    aria-invalid={Boolean(form.formState.errors.password)}
+                    className="h-14 rounded-full bg-background/20 px-4"
+                    id="password"
+                    placeholder="**********"
+                    type="password"
+                    {...form.register("password")}
                 />
+                <FieldError errors={[form.formState.errors.password]} />
+            </Field>
 
-                <div className="-mt-4 flex w-full items-center justify-between">
-                    <Link
-                        className="font-semibold text-primary text-sm hover:underline"
-                        to={ROUTES.AUTH.FORGOT_PASSWORD}
-                    >
-                        Forgot Password?
-                    </Link>
-                </div>
-
-                {/* Error Message */}
-                <FormErrorMessage error={errorMessage} />
-
-                {/* Submit Button */}
-                <Button
-                    className="h-14 w-full gap-4 rounded-full"
-                    isLoading={isPending}
-                    loadingText="Logging in..."
-                    type="submit"
+            <div className="-mt-4 flex w-full items-center justify-between">
+                <Link
+                    className="font-semibold text-primary text-sm hover:underline"
+                    to={ROUTES.AUTH.FORGOT_PASSWORD}
                 >
-                    <LogIn />
-                    Login
-                </Button>
+                    Forgot Password?
+                </Link>
+            </div>
 
-                {/* Register Link */}
-                <div className="text-center">
-                    <p className="text-foreground/70 text-sm">
-                        Don't have an account?{" "}
-                        <Link
-                            className="font-semibold text-primary hover:underline"
-                            to={ROUTES.AUTH.REGISTER}
-                        >
-                            Sign up
-                        </Link>
-                    </p>
-                </div>
-            </form>
-        </Form>
+            {/* Error Message */}
+            <FormErrorMessage error={form.formState.errors?.root?.message} />
+
+            {/* Submit Button */}
+            <Button
+                className="h-14 w-full gap-4 rounded-full"
+                disabled={isPending}
+                type="submit"
+            >
+                <LogIn />
+                {isPending ? "Logging in..." : "Login"}
+            </Button>
+
+            {/* Register Link */}
+            <div className="text-center">
+                <p className="text-foreground/70 text-sm">
+                    Don't have an account?{" "}
+                    <Link
+                        className="font-semibold text-primary hover:underline"
+                        to={ROUTES.AUTH.REGISTER}
+                    >
+                        Sign up
+                    </Link>
+                </p>
+            </div>
+        </form>
     );
 };
