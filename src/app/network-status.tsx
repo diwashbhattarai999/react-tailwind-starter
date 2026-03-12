@@ -2,73 +2,70 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-/**
- * NetworkStatus component to monitor and display network connectivity status.
- *
- * This component listens for online and offline events and displays a message
- * when the user goes offline or comes back online.
- */
 export const NetworkStatus = () => {
     const [message, setMessage] = useState<string | null>(null);
-    const [type, setType] = useState<"success" | "error" | "info" | null>(null);
+    const [type, setType] = useState<"success" | "error" | null>(null);
+    const [visible, setVisible] = useState(false);
     const [wasOffline, setWasOffline] = useState(navigator.onLine === false);
 
-    // Effect to handle online and offline events
     useEffect(() => {
-        // Handler for when the user comes back online
+        const show = (msg: string, t: "success" | "error") => {
+            setMessage(msg);
+            setType(t);
+            setVisible(true);
+        };
+
+        const hide = () => {
+            setVisible(false);
+            setTimeout(() => {
+                setMessage(null);
+                setType(null);
+            }, 400);
+        };
+
         const handleOnline = () => {
             if (wasOffline) {
-                setMessage("You are back online!");
-                setType("success");
+                show("Back online", "success");
                 setWasOffline(false);
-
-                setTimeout(() => {
-                    setMessage(null);
-                    setType(null);
-                }, 3000); // Success message for 3 seconds
+                setTimeout(hide, 3000);
             }
         };
 
-        // Handler for when the user goes offline
         const handleOffline = () => {
-            setMessage(
-                "You are offline. Please check your internet connection and try again."
-            );
-            setType("error");
-            setWasOffline(true); // So we can detect when they come back online
+            show("No internet connection", "error");
+            setWasOffline(true);
         };
 
-        // Add event listeners for online and offline events
         window.addEventListener("online", handleOnline);
         window.addEventListener("offline", handleOffline);
+        if (!navigator.onLine) handleOffline();
 
-        // Initial state check
-        if (!navigator.onLine) {
-            handleOffline();
-        }
-
-        // Cleanup event listeners on component unmount
         return () => {
             window.removeEventListener("online", handleOnline);
             window.removeEventListener("offline", handleOffline);
         };
     }, [wasOffline]);
 
-    // If no message or type, do not render anything
-    if (!(message && type)) return null;
+    if (!message) return null;
 
     return (
         <div
             className={cn(
-                "fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 transform px-4 py-1 text-center text-sm transition-opacity duration-300",
-                type === "success" &&
-                    "border border-green-200 bg-green-100 text-green-500",
-                type === "error" &&
-                    "border border-red-200 bg-red-100 text-red-500",
-                type === "info" &&
-                    "border border-blue-200 bg-blue-100 text-blue-500"
+                "fixed bottom-6 left-1/2 z-[9999] flex -translate-x-1/2 select-none items-center gap-2.5 whitespace-nowrap rounded-full border border-white/10 bg-black/70 px-4 py-2.5 pl-3 font-medium font-poppins text-[13.5px] text-white shadow-sm backdrop-blur-lg transition-all duration-[350ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                visible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0"
             )}
         >
+            <span
+                className={cn(
+                    "h-2 w-2 shrink-0 rounded-full",
+                    type === "success"
+                        ? "bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]"
+                        : "animate-pulse bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)]"
+                )}
+            />
+
             {message}
         </div>
     );

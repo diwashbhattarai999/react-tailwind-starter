@@ -1,27 +1,12 @@
-import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 
 import App from "@/app";
-import { NotFound } from "@/app/not-found";
-import { AuthRedirect } from "@/components/guards/auth-redirect-route";
-import { ProtectedRoute } from "@/components/guards/protected-route";
-import { withSuspense } from "@/components/layouts/with-suspense";
-import { ROUTES } from "@/configs/routes";
-import { AuthLayout } from "@/features/auth";
-import { DashboardLayout } from "@/features/dashboard";
 
 import { ErrorFallback } from "../error-fallback";
-
-// Auth
-const Login = lazy(() => import("@/features/auth/pages/login-page"));
-const Register = lazy(() => import("@/features/auth/pages/register-page"));
-const ForgotPassword = lazy(
-    () => import("@/features/auth/pages/forgot-password-page")
-);
-
-// UnAuth
-const Dashboard = lazy(() => import("@/features/dashboard/home"));
-const LandingPage = lazy(() => import("@/features/landing-page/index"));
+import { NotFound } from "../not-found";
+import { AUTH_ROUTES } from "./auth.routes";
+import { PROTECTED_ROUTES } from "./protected.routes";
+import { UNAUTH_ROUTES } from "./unauth.routes";
 
 export const router = createBrowserRouter([
     {
@@ -31,66 +16,15 @@ export const router = createBrowserRouter([
 
         children: [
             // Site routes ( Public / Unprotected )
-            { path: ROUTES.HOME, element: withSuspense(LandingPage) },
+            ...UNAUTH_ROUTES,
 
-            // Auth routes
-            {
-                Component: AuthRedirect,
-                children: [
-                    {
-                        Component: AuthLayout,
-                        children: [
-                            {
-                                path: ROUTES.AUTH.BASE,
-                                element: (
-                                    <Navigate replace to={ROUTES.AUTH.LOGIN} />
-                                ),
-                            },
-                            {
-                                path: ROUTES.AUTH.LOGIN,
-                                element: withSuspense(Login),
-                            },
-                            {
-                                path: ROUTES.AUTH.REGISTER,
-                                element: withSuspense(Register),
-                            },
-                            {
-                                path: ROUTES.AUTH.FORGOT_PASSWORD,
-                                element: withSuspense(ForgotPassword),
-                            },
-                        ],
-                    },
-                ],
-            },
+            // Auth routes ( Login, Register, Forgot Password, etc. )
+            AUTH_ROUTES,
 
-            // Protected routes
-            {
-                Component: ProtectedRoute,
-                children: [
-                    // Dashboard Routes
-                    {
-                        Component: DashboardLayout,
-                        children: [
-                            {
-                                path: ROUTES.DASHBOARD.BASE,
-                                element: withSuspense(Dashboard),
-                            },
+            // Protected routes ( Dashboard, Profile, etc. )
+            PROTECTED_ROUTES,
 
-                            // Catch-all for dashboard routes
-                            {
-                                path: `${ROUTES.DASHBOARD.BASE}/*`,
-                                element: (
-                                    <NotFound showBackgroundGlow={false} />
-                                ),
-                            },
-                        ],
-                    },
-
-                    // Other protected routes can be added here...
-                ],
-            },
-
-            // Catch-all route for unmatched routes
+            // Catch-all route for unmatched routes (404 Not Found)
             { path: "*", element: <NotFound className="min-h-screen" /> },
         ],
     },
